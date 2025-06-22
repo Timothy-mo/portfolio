@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Timothy M. Mokgolobotho — Designer & Developer</title>
+  <link rel="stylesheet" href="css/global.css" />
+</head>
+<body>
+
+  <!-- Light/Dark Mode Toggle -->
+  <button class="theme-toggle" aria-label="Toggle Light/Dark Mode">Light</button>
+
+  <main role="main" aria-label="Main content" class="container">
+
+    <!-- Slide 1: Landing -->
+    <section id="landing" class="slide" aria-label="Landing slide">
+      <div class="slide-content">
+        <h1>
+          Timothy<br />M. Mokgolobotho
+        </h1>
+        <h2 aria-live="polite" aria-atomic="true" class="animated-subtitle"></h2>
+
+        <div class="cta-buttons">
+          <a href="#portfolio" class="btn">View Work</a>
+          <a href="#contact" class="btn">Get in Touch</a>
+        </div>
+      </div>
+      <div class="slide-bg" aria-hidden="true"></div>
+    </section>
+
+    <!-- Slide 2: About -->
+    <section id="about" class="slide" aria-label="About slide">
+      <div class="slide-content about-content">
+        <div class="text-block">
+          <h3>What is my concept?</h3>
+          <p>I create high-impact, minimal digital systems built to showcase design and code with precision and clarity.</p>
+        </div>
+        <div class="image-block" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <!-- Slide 3: Portfolio -->
+    <section id="portfolio" class="slide" aria-label="Portfolio slide">
+      <h3>Portfolio</h3>
+      <div class="portfolio-grid">
+        <!-- Nine grayscale placeholders -->
+        <div class="portfolio-item" tabindex="0" aria-label="Project 1"></div>
+        <div class="portfolio-item" tabindex="0" aria-label="Project 2"></div>
+        <div class="portfolio-item" tabindex="0" aria-label="Project 3"></div>
+        <div class="portfolio-item" tabindex="0" aria-label="Project 4"></div>
+        <div class="portfolio-item" tabindex="0" aria-label="Project 5"></div>
+        <div class="portfolio-item" tabindex="0" aria-label="Project 6"></div>
+        <div class="portfolio-item" tabindex="0" aria-label="Project 7"></div>
+        <div class="portfolio-item" tabindex="0" aria-label="Project 8"></div>
+        <div class="portfolio-item" tabindex="0" aria-label="Project 9"></div>
+      </div>
+    </section>
+
+    <!-- Slide 4: Services -->
+    <section id="services" class="slide" aria-label="Services slide">
+      <h3>Services</h3>
+      <ul class="services-list">
+        <li>Landing Pages</li>
+        <li>Brand Kits (Logos, Posters, Merch)</li>
+        <li>Full-Stack Web Apps</li>
+        <li>Visual Systems for Creators</li>
+      </ul>
+    </section>
+
+    <!-- Slide 5: Contact -->
+    <section id="contact" class="slide" aria-label="Contact slide">
+      <h3>Contact</h3>
+      <div class="contact-info">
+        <address>
+          <p>Email: <a href="mailto:your@email.com">timothyfortheculture@gmail.com</a></p>
+          <p>Phone: <a href="tel:+1234567890">+27 67 067 5190</a></p>
+          <p>Address: Stand no 154, Mentz badimong, Polokwane</p>
+        </address>
+        <div class="contact-image" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <!-- Slide 6: Thanks -->
+    <section id="thanks" class="slide" aria-label="Thank you slide">
+      <h2>Thanks for Watching</h2>
+      <p><em>"If it doesn’t hit different, it’s wasted space."</em></p>
+    </section>
+
+  </main>
+
+  <!-- Pagination Navigation -->
+  <nav class="pagination" aria-label="Slide navigation">
+    <button class="dot active" aria-label="Go to Landing slide" data-target="landing"></button>
+    <button class="dot" aria-label="Go to About slide" data-target="about"></button>
+    <button class="dot" aria-label="Go to Portfolio slide" data-target="portfolio"></button>
+    <button class="dot" aria-label="Go to Services slide" data-target="services"></button>
+    <button class="dot" aria-label="Go to Contact slide" data-target="contact"></button>
+    <button class="dot" aria-label="Go to Thanks slide" data-target="thanks"></button>
+  </nav>
+
+  <script src="js/global.js"></script>
+</body>
+</html>

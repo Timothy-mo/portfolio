@@ -1,0 +1,283 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  background: #000;
+  color: #fff;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+/* Container & Slides */
+.container {
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll;
+  height: 100vh;
+}
+
+/* Each slide fills viewport */
+.slide {
+  scroll-snap-align: start;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  text-align: center;
+  position: relative;
+  user-select: none;
+}
+
+/* Headings */
+h1 {
+  font-weight: bold;
+  font-size: 3.5rem;
+  line-height: 1.1;
+  letter-spacing: 0.02em;
+  margin-bottom: 0.25em;
+}
+
+h2 {
+  font-weight: 600;
+  font-size: 1.5rem;
+  opacity: 0.7;
+  margin-bottom: 1rem;
+  letter-spacing: 0.04em;
+}
+
+h3 {
+  font-weight: 700;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 1.5rem;
+}
+
+/* Paragraphs */
+p {
+  font-weight: 500;
+  opacity: 0.7;
+  max-width: 600px;
+  margin: 0 auto;
+  letter-spacing: 0.03em;
+  line-height: 1.4;
+}
+
+/* Slide Backgrounds */
+.slide-bg {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: url('../images/landing-grayscale.jpg') center/cover no-repeat;
+  opacity: 0.15;
+  z-index: -1;
+}
+
+/* About Slide Layout */
+.about-content {
+  display: flex;
+  gap: 3rem;
+  max-width: 900px;
+  align-items: center;
+}
+
+.text-block {
+  flex: 1;
+  text-align: left;
+}
+
+.image-block {
+  flex: 1;
+  background: url('../images/about-grayscale.jpg') center/cover no-repeat;
+  filter: grayscale(100%);
+  aspect-ratio: 4/5;
+  border: 1px solid currentColor;
+  border-radius: 8px;
+}
+
+/* Portfolio Grid */
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  max-width: 900px;
+  width: 100%;
+}
+
+.portfolio-item {
+  background: #111;
+  border: 2px solid currentColor;
+  border-radius: 8px;
+  aspect-ratio: 1/1;
+  cursor: pointer;
+  filter: grayscale(100%);
+  transition: filter 0.3s ease, background 0.3s ease;
+}
+
+.portfolio-item:hover,
+.portfolio-item:focus {
+  filter: grayscale(0%);
+  background: #222;
+  outline: none;
+}
+
+/* Services List */
+.services-list {
+  list-style: none;
+  max-width: 600px;
+  text-align: left;
+}
+
+.services-list li {
+  margin-bottom: 1rem;
+  font-weight: 600;
+  font-size: 1.125rem;
+}
+
+/* Contact Info */
+.contact-info {
+  display: flex;
+  gap: 3rem;
+  max-width: 800px;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  text-align: left;
+}
+
+.contact-info address {
+  font-style: normal;
+  line-height: 1.6;
+  max-width: 350px;
+}
+
+.contact-info a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+/* Contact portrait */
+.contact-image {
+  width: 200px;
+  height: 260px;
+  background: url('../images/contact-portrait.jpg') center/cover no-repeat;
+  filter: grayscale(100%);
+  border: 1px solid currentColor;
+  border-radius: 8px;
+}
+
+/* Thanks Slide */
+#thanks h2 {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+#thanks p {
+  font-size: 1.25rem;
+  font-style: italic;
+}
+
+/* Pagination Dots Navigation */
+.pagination {
+  position: fixed;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  z-index: 20;
+}
+
+.dot {
+  width: 14px;
+  height: 14px;
+  border: 2px solid currentColor;
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.dot:hover,
+.dot:focus {
+  outline: none;
+  transform: scale(1.3);
+}
+
+.dot.active {
+  background: currentColor;
+}
+
+/* Animated Subtitle */
+.animated-subtitle {
+  font-weight: 600;
+  font-size: 1.75rem;
+  letter-spacing: 0.04em;
+  min-height: 2.2rem; /* prevent layout shift */
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 2px solid #fff; /* cursor */
+  animation: blinkCursor 0.7s steps(1) infinite;
+  margin-bottom: 1.5rem;
+}
+
+@keyframes blinkCursor {
+  50% {
+    border-color: transparent;
+  }
+}
+
+/* CTA Buttons container */
+.cta-buttons {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+}
+
+.btn {
+  padding: 0.7em 2em;
+  border: 1px solid #fff;
+  border-radius: 9999px;
+  background: transparent;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: background-color 0.25s ease, color 0.25s ease;
+  user-select: none;
+}
+
+.btn:hover,
+.btn:focus {
+  background-color: #fff;
+  color: #000;
+  outline: none;
+}
+
+/* Theme Toggle Button hidden (since no light mode) */
+.theme-toggle {
+  display: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .about-content {
+    flex-direction: column;
+  }
+  .image-block, .contact-image {
+    width: 100%;
+    height: 200px;
+  }
+  .contact-info {
+    flex-direction: column;
+    gap: 2rem;
+  }
+}
