@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Blvck Aesthetix | Coming Soon</title>
   <style>
-    /* Reset + basics */
+    /* Reset */
     * {
       margin: 0;
       padding: 0;
@@ -13,7 +13,7 @@
     }
     body {
       background-color: #000;
-      color: #f5c518;
+      color: #fff;
       font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       display: flex;
       justify-content: center;
@@ -21,26 +21,18 @@
       min-height: 100vh;
       text-align: center;
       padding: 2rem;
-      line-height: 1.4;
       user-select: none;
     }
     .container {
       max-width: 480px;
       width: 100%;
-      border: 3px solid #f5c518;
       padding: 2.5rem 2rem;
-      border-radius: 12px;
-      box-shadow:
-        0 0 15px #f5c51888,
-        inset 0 0 10px #f5c518cc;
-      background: #111;
     }
     .logo {
       font-weight: 900;
       font-size: 3rem;
-      letter-spacing: 0.2em;
+      letter-spacing: 0.15em;
       margin-bottom: 1.5rem;
-      color: #f5c518;
       text-transform: uppercase;
       user-select: text;
     }
@@ -53,13 +45,12 @@
       font-weight: 400;
       font-size: 1.1rem;
       margin-bottom: 2rem;
-      color: #ddd;
+      color: #ccc;
     }
     .countdown {
       font-weight: 700;
       font-size: 1.3rem;
       margin-bottom: 2rem;
-      color: #f5c518;
       font-family: 'Courier New', Courier, monospace;
       letter-spacing: 0.05em;
     }
@@ -67,7 +58,7 @@
       margin-bottom: 2rem;
     }
     .socials a {
-      color: #f5c518;
+      color: #fff;
       text-decoration: none;
       font-weight: 700;
       margin: 0 1rem;
@@ -77,7 +68,7 @@
     }
     .socials a:hover,
     .socials a:focus {
-      color: #fff;
+      color: #999;
       text-decoration: underline;
     }
     footer {
@@ -131,7 +122,6 @@
       const countdownEl = document.querySelector('.countdown');
 
       // Target launch date: 29 June 2025 00:00:00 SAST (UTC+2)
-      // SAST is UTC+2, so adjust Date.UTC to 22:00 UTC on June 28 (0-based month)
       const launchUTC = Date.UTC(2025, 5, 28, 22, 0, 0);
 
       function updateCountdown() {
