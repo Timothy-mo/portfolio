@@ -4,8 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Blvck Aesthetix | Coming Soon</title>
+  <meta name="description" content="Blvck Aesthetix — Creative drops, coding, design, and more. Something great is coming.">
+  <meta name="robots" content="noindex, nofollow">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
   <style>
-    /* Reset */
     * {
       margin: 0;
       padding: 0;
@@ -22,11 +24,13 @@
       text-align: center;
       padding: 2rem;
       user-select: none;
+      overflow: hidden;
     }
     .container {
       max-width: 480px;
       width: 100%;
       padding: 2.5rem 2rem;
+      animation: fadeIn 1.5s ease-in;
     }
     .logo {
       font-weight: 900;
@@ -35,11 +39,13 @@
       margin-bottom: 1.5rem;
       text-transform: uppercase;
       user-select: text;
+      animation: construct 1.2s ease forwards;
     }
     h2 {
       font-weight: 700;
       font-size: 1.75rem;
       margin-bottom: 0.7rem;
+      animation: construct 1.4s ease forwards;
     }
     p.lead {
       font-weight: 400;
@@ -53,9 +59,13 @@
       margin-bottom: 2rem;
       font-family: 'Courier New', Courier, monospace;
       letter-spacing: 0.05em;
+      animation: blinkIn 1s ease forwards;
     }
     .socials {
       margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeIn 2.5s ease forwards;
+      animation-delay: 1s;
     }
     .socials a {
       color: #fff;
@@ -76,6 +86,9 @@
       font-size: 0.85rem;
       font-weight: 400;
       user-select: none;
+      opacity: 0;
+      animation: fadeIn 3s ease forwards;
+      animation-delay: 1.5s;
     }
     @media (max-width: 520px) {
       .container {
@@ -95,53 +108,61 @@
         margin: 0 0.7rem;
       }
     }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes blinkIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes construct {
+      0% { letter-spacing: 0.5em; opacity: 0; transform: scale(0.8); }
+      100% { letter-spacing: 0.15em; opacity: 1; transform: scale(1); }
+    }
   </style>
 </head>
 <body>
   <main class="container" role="main" aria-labelledby="page-title">
     <h1 id="page-title" class="logo">Blvck Aesthetix</h1>
-
     <h2>Something Great Is Coming</h2>
-
     <div class="countdown" aria-live="polite" aria-atomic="true" aria-label="Countdown timer">
       Loading countdown...
     </div>
-
     <nav class="socials" aria-label="Social media links">
       <a href="https://www.instagram.com/blvck_aesthetix" target="_blank" rel="noopener noreferrer" tabindex="0">Instagram</a>
       <a href="https://wa.me/27670675190" target="_blank" rel="noopener noreferrer" tabindex="0">WhatsApp</a>
       <a href="mailto:timothyfortheculture@gmail.com" tabindex="0">Email</a>
     </nav>
-
     <footer>&copy; 2025 Blvck Aesthetix. All rights reserved.</footer>
   </main>
+
+  <noscript>
+    <p class="countdown">Launches 29 June 2025</p>
+  </noscript>
 
   <script>
     (() => {
       const countdownEl = document.querySelector('.countdown');
-
-      // Target launch date: 29 June 2025 00:00:00 SAST (UTC+2)
       const launchUTC = Date.UTC(2025, 5, 28, 22, 0, 0);
-
       function updateCountdown() {
         const nowUTC = new Date().getTime();
         const diff = launchUTC - nowUTC;
-
         if (diff <= 0) {
           countdownEl.textContent = "We’ve launched! 🚀";
           clearInterval(interval);
           return;
         }
-
         const days = Math.floor(diff / (1000 * 60 * 60 * 24));
         const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-
         countdownEl.textContent = `${days} day${days !== 1 ? 's' : ''} ` +
           `${hours} hour${hours !== 1 ? 's' : ''} ` +
           `${minutes} minute${minutes !== 1 ? 's' : ''} left to drop`;
       }
-
       updateCountdown();
       const interval = setInterval(updateCountdown, 60000);
     })();
