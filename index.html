@@ -4,43 +4,135 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Blvck Aesthetix | Coming Soon</title>
-  <link rel="stylesheet" href="css/global.css" />
+  <style>
+    /* Reset + basics */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      background-color: #000;
+      color: #f5c518;
+      font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      text-align: center;
+      padding: 2rem;
+      line-height: 1.4;
+      user-select: none;
+    }
+    .container {
+      max-width: 480px;
+      width: 100%;
+      border: 3px solid #f5c518;
+      padding: 2.5rem 2rem;
+      border-radius: 12px;
+      box-shadow:
+        0 0 15px #f5c51888,
+        inset 0 0 10px #f5c518cc;
+      background: #111;
+    }
+    .logo {
+      font-weight: 900;
+      font-size: 3rem;
+      letter-spacing: 0.2em;
+      margin-bottom: 1.5rem;
+      color: #f5c518;
+      text-transform: uppercase;
+      user-select: text;
+    }
+    h2 {
+      font-weight: 700;
+      font-size: 1.75rem;
+      margin-bottom: 0.7rem;
+    }
+    p.lead {
+      font-weight: 400;
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+      color: #ddd;
+    }
+    .countdown {
+      font-weight: 700;
+      font-size: 1.3rem;
+      margin-bottom: 2rem;
+      color: #f5c518;
+      font-family: 'Courier New', Courier, monospace;
+      letter-spacing: 0.05em;
+    }
+    .socials {
+      margin-bottom: 2rem;
+    }
+    .socials a {
+      color: #f5c518;
+      text-decoration: none;
+      font-weight: 700;
+      margin: 0 1rem;
+      font-size: 1.1rem;
+      transition: color 0.25s ease;
+      user-select: text;
+    }
+    .socials a:hover,
+    .socials a:focus {
+      color: #fff;
+      text-decoration: underline;
+    }
+    footer {
+      color: #666;
+      font-size: 0.85rem;
+      font-weight: 400;
+      user-select: none;
+    }
+    @media (max-width: 520px) {
+      .container {
+        padding: 2rem 1.2rem;
+      }
+      .logo {
+        font-size: 2.5rem;
+      }
+      h2 {
+        font-size: 1.4rem;
+      }
+      .countdown {
+        font-size: 1.1rem;
+      }
+      .socials a {
+        font-size: 1rem;
+        margin: 0 0.7rem;
+      }
+    }
+  </style>
 </head>
-<body class="coming-soon-page">
+<body>
+  <main class="container" role="main" aria-labelledby="page-title">
+    <h1 id="page-title" class="logo">Blvck Aesthetix</h1>
 
-  <section class="coming-soon-container">
-    <div class="logo">
-      <h1>Blvck Aesthetix</h1>
+    <h2>Something Great Is Coming</h2>
+    <p class="lead">We’re building something legendary. Stay tuned.</p>
+
+    <div class="countdown" aria-live="polite" aria-atomic="true" aria-label="Countdown timer">
+      Loading countdown...
     </div>
 
-    <div class="message">
-      <h2>Something Great Is Coming</h2>
-      <p>We’re building something legendary. Stay tuned.</p>
-    </div>
+    <nav class="socials" aria-label="Social media links">
+      <a href="https://www.instagram.com/blvck_aesthetix" target="_blank" rel="noopener noreferrer" tabindex="0">Instagram</a>
+      <a href="https://wa.me/27670675190" target="_blank" rel="noopener noreferrer" tabindex="0">WhatsApp</a>
+      <a href="mailto:timothyfortheculture@gmail.com" tabindex="0">Email</a>
+    </nav>
 
-    <div class="countdown">
-      <p>Launching in: <span id="countdown-timer">Loading...</span></p>
-    </div>
-
-    <div class="socials">
-      <a href="https://www.instagram.com/blvck_aesthetix" target="_blank" rel="noopener noreferrer">Instagram</a>
-      <a href="https://wa.me/27670675190" target="_blank" rel="noopener noreferrer">WhatsApp</a>
-      <a href="mailto:timothyfortheculture@gmail.com">Email</a>
-    </div>
-
-    <footer>
-      <p>&copy; 2025 Blvck Aesthetix. All rights reserved.</p>
-    </footer>
-  </section>
+    <footer>&copy; 2025 Blvck Aesthetix. All rights reserved.</footer>
+  </main>
 
   <script>
     (() => {
-      const countdownEl = document.getElementById('countdown-timer');
+      const countdownEl = document.querySelector('.countdown');
 
       // Target launch date: 29 June 2025 00:00:00 SAST (UTC+2)
-      // SAST = UTC+2, so create date in UTC and add 2 hours offset
-      // Use Date.UTC for 2025-06-29 00:00:00 UTC+2 = 2025-06-28 22:00:00 UTC
-      const launchUTC = Date.UTC(2025, 5, 28, 22, 0, 0); // Months are zero-indexed, so June=5
+      // SAST is UTC+2, so adjust Date.UTC to 22:00 UTC on June 28 (0-based month)
+      const launchUTC = Date.UTC(2025, 5, 28, 22, 0, 0);
 
       function updateCountdown() {
         const nowUTC = new Date().getTime();
@@ -62,9 +154,8 @@
       }
 
       updateCountdown();
-      const interval = setInterval(updateCountdown, 60000); // Update every minute
+      const interval = setInterval(updateCountdown, 60000);
     })();
   </script>
-
 </body>
 </html>
