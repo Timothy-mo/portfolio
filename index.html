@@ -6,7 +6,7 @@
   <title>Blvck Aesthetix | Coming Soon</title>
   <meta name="description" content="Blvck Aesthetix — Creative drops, coding, design, and more. Something great is coming.">
   <meta name="robots" content="noindex, nofollow">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet" />
   <style>
     * {
       margin: 0;
@@ -25,12 +25,29 @@
       padding: 2rem;
       user-select: none;
       overflow: hidden;
+      position: relative;
+      z-index: 1;
     }
+
+    #bgCanvas {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0;
+      pointer-events: none;
+      background: transparent;
+      display: block;
+    }
+
     .container {
       max-width: 480px;
       width: 100%;
       padding: 2.5rem 2rem;
       animation: fadeIn 1.5s ease-in;
+      position: relative;
+      z-index: 10;
+      user-select: text;
     }
     .logo {
       font-weight: 900;
@@ -38,7 +55,6 @@
       letter-spacing: 0.15em;
       margin-bottom: 1.5rem;
       text-transform: uppercase;
-      user-select: text;
       animation: construct 1.2s ease forwards;
     }
     h2 {
@@ -74,7 +90,6 @@
       margin: 0 1rem;
       font-size: 1.1rem;
       transition: color 0.25s ease;
-      user-select: text;
     }
     .socials a:hover,
     .socials a:focus {
@@ -113,12 +128,10 @@
       from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
     }
-
     @keyframes blinkIn {
       from { opacity: 0; }
       to { opacity: 1; }
     }
-
     @keyframes construct {
       0% { letter-spacing: 0.5em; opacity: 0; transform: scale(0.8); }
       100% { letter-spacing: 0.15em; opacity: 1; transform: scale(1); }
@@ -126,6 +139,8 @@
   </style>
 </head>
 <body>
+  <canvas id="bgCanvas" aria-hidden="true"></canvas>
+
   <main class="container" role="main" aria-labelledby="page-title">
     <h1 id="page-title" class="logo">Blvck Aesthetix</h1>
     <h2>Something Great Is Coming</h2>
@@ -144,7 +159,79 @@
     <p class="countdown">Launches 29 June 2025</p>
   </noscript>
 
+  <!-- THREE.JS CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.min.js"></script>
   <script>
+    // Setup basic scene, camera, renderer
+    const canvas = document.getElementById('bgCanvas');
+    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setClearColor(0x000000, 0); // transparent background for blending
+
+    const scene = new THREE.Scene();
+
+    const camera = new THREE.PerspectiveCamera(
+      75, window.innerWidth / window.innerHeight, 0.1, 1000
+    );
+    camera.position.z = 50;
+
+    // Create particles geometry
+    const particleCount = 120;
+    const positions = new Float32Array(particleCount * 3);
+
+    for(let i = 0; i < particleCount; i++) {
+      positions[i * 3] = (Math.random() - 0.5) * 120;      // x
+      positions[i * 3 + 1] = (Math.random() - 0.5) * 80;  // y
+      positions[i * 3 + 2] = (Math.random() - 0.5) * 40;  // z
+    }
+
+    const geometry = new THREE.BufferGeometry();
+    geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+
+    // Particle material: small white glowing points
+    const material = new THREE.PointsMaterial({
+      color: 0xffffff,
+      size: 1.8,
+      transparent: true,
+      opacity: 0.15,
+      blending: THREE.AdditiveBlending,
+      depthWrite: false,
+    });
+
+    const points = new THREE.Points(geometry, material);
+    scene.add(points);
+
+    // Animate particles slowly drifting upward
+    function animate() {
+      requestAnimationFrame(animate);
+
+      const positions = geometry.attributes.position.array;
+      for(let i = 0; i < particleCount; i++) {
+        // particles move up slowly
+        positions[i * 3 + 1] += 0.02;
+        // reset particle to bottom if too high
+        if(positions[i * 3 + 1] > 40) {
+          positions[i * 3 + 1] = -40;
+          positions[i * 3] = (Math.random() - 0.5) * 120; // random x
+          positions[i * 3 + 2] = (Math.random() - 0.5) * 40; // random z
+        }
+      }
+      geometry.attributes.position.needsUpdate = true;
+
+      renderer.render(scene, camera);
+    }
+    animate();
+
+    // Handle resize
+    window.addEventListener('resize', () => {
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+      renderer.setSize(width, height);
+      camera.aspect = width / height;
+      camera.updateProjectionMatrix();
+    });
+
+    // Countdown logic (unchanged)
     (() => {
       const countdownEl = document.querySelector('.countdown');
       const launchUTC = Date.UTC(2025, 5, 28, 22, 0, 0);
