@@ -333,47 +333,57 @@
     menuBtn.addEventListener('click', () => mobileMenu.classList.remove('translate-x-full'));
     closeMenu.addEventListener('click', () => mobileMenu.classList.add('translate-x-full'));
 
-    // Custom Cursor: Trailing Beam
+    // CUSTOM CURSOR - Disable on mobile (width < 768px)
     const cursor = document.getElementById('customCursor');
-    let mouseX = 0, mouseY = 0;
-    let cursorX = 0, cursorY = 0;
+    if (window.innerWidth >= 768) {
+      let mouseX = 0, mouseY = 0;
+      let cursorX = 0, cursorY = 0;
 
-    window.addEventListener('mousemove', e => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-    });
+      window.addEventListener('mousemove', e => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+      });
 
-    function animateCursor() {
-      cursorX += (mouseX - cursorX) * 0.45;
-      cursorY += (mouseY - cursorY) * 0.5;
-      cursor.style.left = cursorX + 'px';
-      cursor.style.top = cursorY + 'px';
-      requestAnimationFrame(animateCursor);
+      function animateCursor() {
+        cursorX += (mouseX - cursorX) * 0.45;
+        cursorY += (mouseY - cursorY) * 0.5;
+        cursor.style.left = cursorX + 'px';
+        cursor.style.top = cursorY + 'px';
+        requestAnimationFrame(animateCursor);
+      }
+      animateCursor();
+
+      // Hover effects
+      const hoverTargets = document.querySelectorAll('a, button');
+      hoverTargets.forEach(el => {
+        el.addEventListener('mouseenter', () => {
+          cursor.style.width = '28px';
+          cursor.style.height = '28px';
+          cursor.style.boxShadow = '0 0 24px #FF6E40, 0 0 48px #B71C1C';
+        });
+        el.addEventListener('mouseleave', () => {
+          cursor.style.width = '16px';
+          cursor.style.height = '16px';
+          cursor.style.boxShadow = '0 0 16px #FF6E40, 0 0 40px #B71C1C';
+        });
+      });
+
+      // Click pulse effect
+      window.addEventListener('mousedown', () => {
+        cursor.style.transform += ' scale(0.8)';
+      });
+      window.addEventListener('mouseup', () => {
+        cursor.style.transform = 'translate(-50%, -50%)';
+      });
+    } else {
+      // On mobile, hide cursor and restore default pointer
+      cursor.style.display = 'none';
+      document.body.style.cursor = 'auto';
+      // Also remove cursor:none from links/buttons on mobile by overriding with inline style
+      document.querySelectorAll('a, button').forEach(el => {
+        el.style.cursor = 'auto';
+      });
     }
-    animateCursor();
-
-    // Hover effects
-    const hoverTargets = document.querySelectorAll('a, button');
-    hoverTargets.forEach(el => {
-      el.addEventListener('mouseenter', () => {
-        cursor.style.width = '28px';
-        cursor.style.height = '28px';
-        cursor.style.boxShadow = '0 0 24px #FF6E40, 0 0 48px #B71C1C';
-      });
-      el.addEventListener('mouseleave', () => {
-        cursor.style.width = '16px';
-        cursor.style.height = '16px';
-        cursor.style.boxShadow = '0 0 16px #FF6E40, 0 0 40px #B71C1C';
-      });
-    });
-
-    // Click pulse effect
-    window.addEventListener('mousedown', () => {
-      cursor.style.transform += ' scale(0.8)';
-    });
-    window.addEventListener('mouseup', () => {
-      cursor.style.transform = 'translate(-50%, -50%)';
-    });
   </script>
 </body>
 </html>
