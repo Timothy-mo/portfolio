@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CXXL Shop | Blvck Aesthetix</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            heading: ['Space Grotesk', 'sans-serif'],
+          },
+          colors: {
+            black: '#000',
+            white: '#fff',
+            subtleWhite: '#FFFFFFB3',
+          },
+          borderRadius: {
+            pill: '9999px',
+          },
+          backdropBlur: {
+            xs: '2px',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    .btn {
+      border: 1px solid #fff;
+      padding: 0.5rem 1.5rem;
+      border-radius: 9999px;
+      text-transform: uppercase;
+      font-size: 0.875rem;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      background: transparent;
+      color: #fff;
+    }
+
+    .btn:hover {
+      background-color: #fff;
+      color: #000;
+    }
+
+    .lab-card:hover {
+      transform: scale(1.015);
+    }
+
+    .glass-header {
+      background-color: rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+  </style>
+</head>
+
+<body class="min-h-screen w-full overflow-x-hidden">
+
+  <!-- Glassmorphic Header -->
+  <header class="glass-header w-full px-6 py-6 flex justify-between items-center text-white font-heading z-50 fixed top-0 left-0 right-0">
+    <h1 class="text-xl font-bold tracking-widest uppercase">Blvck Aesthetix</h1>
+    <!-- Hamburger (Mobile) -->
+    <button id="menuBtn" class="text-white text-2xl md:hidden focus:outline-none">☰</button>
+    <!-- Desktop Nav -->
+    <nav class="hidden md:flex gap-6 text-sm text-white font-medium">
+      <a href="../index.html" class="hover:opacity-100 opacity-70">Home</a>
+      <a href="portfolio.html" class="hover:opacity-100 opacity-70">Portfolio</a>
+      <a href="shop.html" class="hover:opacity-100 opacity-70">Shop</a>
+      <a href="web.html" class="hover:opacity-100 opacity-70">Web</a>
+      <a href="about.html" class="hover:opacity-100 opacity-70">About</a>
+      <a href="collab.html" class="hover:opacity-100 opacity-70">Collab</a>
+    </nav>
+  </header>
+
+  <!-- Mobile Menu -->
+  <div id="mobileMenu" class="fixed top-0 right-0 h-full w-64 bg-black text-white transform translate-x-full transition-transform duration-300 z-50 p-6 space-y-6 md:hidden">
+    <button id="closeMenu" class="text-right w-full text-xl">×</button>
+    <nav class="flex flex-col gap-4 text-sm font-medium">
+      <a href="../index.html">Home</a>
+      <a href="portfolio.html">Portfolio</a>
+      <a href="shop.html">Shop</a>
+      <a href="web.html">Web</a>
+      <a href="about.html">About</a>
+      <a href="collab.html">Collab</a>
+    </nav>
+  </div>
+
+  <!-- Spacer for fixed header -->
+  <div class="h-[88px]"></div>
+
+  <!-- CXXL Shop Intro -->
+  <section class="text-center py-10 px-4">
+    <h2 class="text-4xl font-bold uppercase tracking-widest">CXXL Shop</h2>
+    <p class="opacity-70 mt-2 text-sm max-w-xl mx-auto">
+      Exclusive CXXL merch series — bold designs with premium quality and limited availability.
+    </p>
+  </section>
+
+  <!-- Product Grid -->
+  <section class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 max-w-6xl mx-auto px-6 pb-20">
+
+    <div class="lab-card border border-white rounded-2xl p-6 transition transform duration-300">
+      <h3 class="text-lg font-semibold uppercase tracking-wide">The Watcher Hoodie</h3>
+      <p class="text-sm opacity-70 mt-2 leading-relaxed">Oversized premium hoodie with signature Watcher design — comfort meets style.</p>
+      <button class="btn mt-4">Buy R750</button>
+    </div>
+
+    <div class="lab-card border border-white rounded-2xl p-6 transition transform duration-300">
+      <h3 class="text-lg font-semibold uppercase tracking-wide">The Igniter Tee</h3>
+      <p class="text-sm opacity-70 mt-2 leading-relaxed">Soft cotton tee with the iconic Igniter graphic — designed for everyday wear.</p>
+      <button class="btn mt-4">Buy R450</button>
+    </div>
+
+    <div class="lab-card border border-white rounded-2xl p-6 transition transform duration-300">
+      <h3 class="text-lg font-semibold uppercase tracking-wide">CXXL Logo Cap</h3>
+      <p class="text-sm opacity-70 mt-2 leading-relaxed">Adjustable black cap with embroidered CXXL logo — subtle flex for any look.</p>
+      <button class="btn mt-4">Buy R320</button>
+    </div>
+
+    <div class="lab-card border border-white rounded-2xl p-6 transition transform duration-300">
+      <h3 class="text-lg font-semibold uppercase tracking-wide">Sticker Pack</h3>
+      <p class="text-sm opacity-70 mt-2 leading-relaxed">Set of 10 matte vinyl stickers with exclusive CXXL artwork — perfect for laptops and gear.</p>
+      <button class="btn mt-4">Buy R180</button>
+    </div>
+
+    <div class="lab-card border border-white rounded-2xl p-6 transition transform duration-300">
+      <h3 class="text-lg font-semibold uppercase tracking-wide">Limited Edition Poster</h3>
+      <p class="text-sm opacity-70 mt-2 leading-relaxed">High-quality print of CXXL artwork, signed and numbered — collectors only.</p>
+      <button class="btn mt-4">Buy R600</button>
+    </div>
+
+  </section>
+
+  <!-- Footer -->
+  <footer class="w-full text-white px-6 py-10 border-t border-white/20">
+    <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6 text-sm opacity-70">
+      <p>© 2025 Blvck Aesthetix. All rights reserved.</p>
+      <div class="flex gap-6">
+        <a href="https://facebook.com/blvckaesthetix" target="_blank" class="hover:opacity-100 opacity-70">Facebook</a>
+        <a href="https://instagram.com/blvckaesthetix" target="_blank" class="hover:opacity-100 opacity-70">Instagram</a>
+        <a href="https://x.com/blvckaesthetix" target="_blank" class="hover:opacity-100 opacity-70">X</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JS for mobile menu -->
+  <script>
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const closeMenu = document.getElementById('closeMenu');
+
+    menuBtn.addEventListener('click', () => {
+      mobileMenu.classList.remove('translate-x-full');
+    });
+
+    closeMenu.addEventListener('click', () => {
+      mobileMenu.classList.add('translate-x-full');
+    });
+  </script>
+
+</body>
+</html>

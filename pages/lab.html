@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Digital Lab | Blvck Aesthetix</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Space Grotesk', 'system-ui', 'sans-serif'],
+          },
+          colors: {
+            black: '#000',
+            white: '#fff',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: 'Space Grotesk', system-ui, sans-serif;
+    }
+
+    .btn {
+      border: 1px solid #fff;
+      padding: 0.5rem 1.5rem;
+      border-radius: 9999px;
+      text-transform: uppercase;
+      font-size: 0.875rem;
+      transition: all 0.3s ease;
+    }
+
+    .btn:hover {
+      background-color: #fff;
+      color: #000;
+    }
+
+    .lab-card:hover {
+      transform: scale(1.015);
+    }
+  </style>
+</head>
+
+<body class="min-h-screen w-full overflow-x-hidden">
+
+  <!-- Header -->
+  <header class="flex justify-between items-center p-6">
+    <h1 class="text-2xl font-bold tracking-wide">Blvck Lab</h1>
+    <a href="index.html" class="text-sm opacity-70 hover:opacity-100 transition">← Back Home</a>
+  </header>
+
+  <!-- Lab Intro -->
+  <section class="text-center py-10 px-4">
+    <h2 class="text-4xl font-bold uppercase tracking-widest">Digital Lab</h2>
+    <p class="opacity-70 mt-2 text-sm max-w-xl mx-auto">
+      A playground of code, visuals, prototypes, and concept drops. This is where design meets raw execution.
+    </p>
+  </section>
+
+  <!-- Lab Modules -->
+  <section class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 max-w-6xl mx-auto px-6 pb-20">
+    
+    <!-- Example Lab Card -->
+    <div class="lab-card border border-white rounded-2xl p-6 transition transform duration-300">
+      <h3 class="text-lg font-semibold uppercase tracking-wide">Component Library</h3>
+      <p class="text-sm opacity-70 mt-2 leading-relaxed">A fully custom Tailwind component kit built for Blvck Aesthetix projects — UI essentials, polished and plug-ready.</p>
+      <button class="btn mt-4">View</button>
+    </div>
+
+    <div class="lab-card border border-white rounded-2xl p-6 transition transform duration-300">
+      <h3 class="text-lg font-semibold uppercase tracking-wide">Dark Mode System</h3>
+      <p class="text-sm opacity-70 mt-2 leading-relaxed">A scalable theme toggle powered by CSS variables and JavaScript — usable in any project.</p>
+      <button class="btn mt-4">Explore</button>
+    </div>
+
+    <div class="lab-card border border-white rounded-2xl p-6 transition transform duration-300">
+      <h3 class="text-lg font-semibold uppercase tracking-wide">GSAP Animations</h3>
+      <p class="text-sm opacity-70 mt-2 leading-relaxed">Motion library experiments including page transitions, text reveals, and scroll triggers for a luxury feel.</p>
+      <button class="btn mt-4">Try Demo</button>
+    </div>
+
+    <!-- Add more lab modules as needed -->
+    
+  </section>
+
+</body>
+</html>
