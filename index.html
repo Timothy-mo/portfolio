@@ -3,256 +3,377 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Blvck Aesthetix | Coming Soon</title>
-  <meta name="description" content="Blvck Aesthetix — Creative drops, coding, design, and more. Something great is coming.">
-  <meta name="robots" content="noindex, nofollow">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet" />
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+  <title>Timothy | Blvck Aesthetix</title>
+
+  <!-- Fonts & Tailwind -->
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;900&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/gsap@3.12.2/dist/gsap.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            heading: ['Space Grotesk', 'sans-serif'],
+            body: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            charcoal: '#000000',
+            whiteText: '#FFFFFF',
+            subtleWhite: '#FFFFFFB3',
+            transparentWhite: '#FFFFFF33',
+          },
+          animation: {
+            pulseSlow: 'pulse 6s ease-in-out infinite',
+          }
+        }
+      }
     }
-    body {
-      background-color: #000;
-      color: #fff;
-      font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      text-align: center;
-      padding: 2rem;
-      user-select: none;
-      overflow: hidden;
-      position: relative;
-      z-index: 1;
+  </script>
+
+  <style>
+    /* Hide system cursor */
+    body, a, button {
+      cursor: none;
     }
 
-    #bgCanvas {
+    /* Glowing custom cursor */
+    #customCursor {
       position: fixed;
       top: 0; left: 0;
-      width: 100vw;
-      height: 100vh;
-      z-index: 0;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #FF6E40, #B71C1C);
+      box-shadow: 0 0 16px #FF6E40, 0 0 40px #B71C1C;
       pointer-events: none;
-      background: transparent;
-      display: block;
+      transform: translate(-50%, -50%);
+      transition: width 0.25s ease, height 0.25s ease, box-shadow 0.25s ease, transform 0.2s ease;
+      z-index: 9999;
+      mix-blend-mode: screen;
     }
 
-    .container {
-      max-width: 480px;
+    body {
+      background-color: #000000;
+      color: #FFFFFF;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* Initially hide main content */
+    header, main, footer {
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.8s ease;
+    }
+
+    .portfolio-box {
       width: 100%;
-      padding: 2.5rem 2rem;
-      animation: fadeIn 1.5s ease-in;
-      position: relative;
-      z-index: 10;
-      user-select: text;
-    }
-    .logo {
-      font-weight: 900;
-      font-size: 3rem;
-      letter-spacing: 0.15em;
-      margin-bottom: 1.5rem;
-      text-transform: uppercase;
-      animation: construct 1.2s ease forwards;
-    }
-    h2 {
+      max-width: 360px;
+      height: 320px;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 1rem;
+      box-shadow: 0 8px 24px rgba(255, 255, 255, 0.1);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: #FFFFFF;
       font-weight: 700;
-      font-size: 1.75rem;
-      margin-bottom: 0.7rem;
-      animation: construct 1.4s ease forwards;
-    }
-    p.lead {
-      font-weight: 400;
-      font-size: 1.1rem;
-      margin-bottom: 2rem;
-      color: #ccc;
-    }
-    .countdown {
-      font-weight: 700;
-      font-size: 1.3rem;
-      margin-bottom: 2rem;
-      font-family: 'Courier New', Courier, monospace;
-      letter-spacing: 0.05em;
-      animation: blinkIn 1s ease forwards;
-    }
-    .socials {
-      margin-bottom: 2rem;
-      opacity: 0;
-      animation: fadeIn 2.5s ease forwards;
-      animation-delay: 1s;
-    }
-    .socials a {
-      color: #fff;
-      text-decoration: none;
-      font-weight: 700;
-      margin: 0 1rem;
-      font-size: 1.1rem;
-      transition: color 0.25s ease;
-    }
-    .socials a:hover,
-    .socials a:focus {
-      color: #999;
-      text-decoration: underline;
-    }
-    footer {
-      color: #666;
-      font-size: 0.85rem;
-      font-weight: 400;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.25rem;
       user-select: none;
-      opacity: 0;
-      animation: fadeIn 3s ease forwards;
-      animation-delay: 1.5s;
-    }
-    @media (max-width: 520px) {
-      .container {
-        padding: 2rem 1.2rem;
-      }
-      .logo {
-        font-size: 2.5rem;
-      }
-      h2 {
-        font-size: 1.4rem;
-      }
-      .countdown {
-        font-size: 1.1rem;
-      }
-      .socials a {
-        font-size: 1rem;
-        margin: 0 0.7rem;
-      }
+      transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: none;
+      text-align: center;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
+    .portfolio-box:hover {
+      transform: scale(1.03);
+      box-shadow: 0 12px 36px rgba(255, 255, 255, 0.2);
     }
-    @keyframes blinkIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
+
+    .portfolio-line {
+      width: 60%;
+      height: 6px;
+      background-color: #666666;
+      border-radius: 3px;
+      margin: 12px 0;
+      animation: linePulse 1.8s ease-in-out infinite;
     }
-    @keyframes construct {
-      0% { letter-spacing: 0.5em; opacity: 0; transform: scale(0.8); }
-      100% { letter-spacing: 0.15em; opacity: 1; transform: scale(1); }
+
+    .portfolio-line:nth-child(odd) { animation-delay: 0s; }
+    .portfolio-line:nth-child(even) { animation-delay: 0.9s; }
+
+    @keyframes linePulse {
+      0%, 100% { opacity: 0.3; transform: scaleX(0.7); }
+      50% { opacity: 1; transform: scaleX(1); }
+    }
+
+    #dynamicLine {
+      color: #FFFFFF;
+      font-variant: small-caps;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      border-right: 2px solid #FFFFFFB3;
+      animation: blinkCursor 0.75s step-end infinite;
+      white-space: normal;
+      word-break: break-word;
+    }
+
+    @keyframes blinkCursor {
+      50% { border-color: transparent; }
+    }
+
+    a.group {
+      border-color: #FFFFFF;
+      color: #FFFFFF;
+    }
+
+    a.group:hover {
+      background-color: #FFFFFF;
+      color: #000000;
     }
   </style>
 </head>
-<body>
-  <canvas id="bgCanvas" aria-hidden="true"></canvas>
+<body class="relative">
 
-  <main class="container" role="main" aria-labelledby="page-title">
-    <h1 id="page-title" class="logo">Blvck Aesthetix</h1>
-    <h2>Something Great Is Coming</h2>
-    <div class="countdown" aria-live="polite" aria-atomic="true" aria-label="Countdown timer">
-      Loading countdown...
-    </div>
-    <nav class="socials" aria-label="Social media links">
-      <a href="https://www.instagram.com/blvck_aesthetix" target="_blank" rel="noopener noreferrer" tabindex="0">Instagram</a>
-      <a href="https://wa.me/27670675190" target="_blank" rel="noopener noreferrer" tabindex="0">WhatsApp</a>
-      <a href="mailto:timothyfortheculture@gmail.com" tabindex="0">Email</a>
+  <!-- Intro Overlay -->
+  <div id="introOverlay" aria-hidden="true" style="
+    position: fixed;
+    inset: 0;
+    background: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100000;
+    user-select: none;
+    pointer-events: none;
+  ">
+    <h1 id="introText" style="
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 900;
+      font-size: clamp(4rem, 10vw, 8rem);
+      color: white;
+      letter-spacing: 0.25em;
+      opacity: 0;
+      transform: scale(0.95);
+      transition: opacity 1.2s ease, transform 1.2s ease;
+      white-space: nowrap;
+    ">
+      BLVCK AESTHETIX
+    </h1>
+  </div>
+
+  <!-- HEADER -->
+  <header class="w-full px-6 py-6 flex justify-between items-center text-white font-heading fixed top-0 left-0 backdrop-blur-md bg-transparent border-b border-white/10 z-50">
+    <h1 class="text-xl font-bold tracking-widest uppercase">Blvck Aesthetix</h1>
+    <button id="menuBtn" class="text-white text-2xl md:hidden focus:outline-none">☰</button>
+    <nav class="hidden md:flex gap-6 text-sm text-white font-medium">
+      <a href="index.html" class="hover:opacity-100 opacity-70">Home</a>
+      <a href="pages/portfolio.html" class="hover:opacity-100 opacity-70">Portfolio</a>
+      <a href="pages/web.html" class="hover:opacity-100 opacity-70">Web</a>
+      <a href="pages/about.html" class="hover:opacity-100 opacity-70">About</a>
+      <a href="pages/collab.html" class="hover:opacity-100 opacity-70">Collab</a>
     </nav>
-    <footer>&copy; 2025 Blvck Aesthetix. All rights reserved.</footer>
+  </header>
+
+  <!-- MOBILE MENU -->
+  <div id="mobileMenu" class="fixed top-0 right-0 h-full w-64 bg-black text-white transform translate-x-full transition-transform duration-300 z-50 p-6 space-y-6 md:hidden">
+    <button id="closeMenu" class="text-right w-full text-xl">×</button>
+    <nav class="flex flex-col gap-4 text-sm font-medium">
+      <a href="index.html">Home</a>
+      <a href="pages/portfolio.html">Portfolio</a>
+      <a href="pages/shop.html">Shop</a>
+      <a href="pages/web.html">Web</a>
+      <a href="pages/about.html">About</a>
+      <a href="pages/collab.html">Collab</a>
+    </nav>
+  </div>
+
+  <!-- HERO -->
+  <main class="relative grid grid-cols-1 md:grid-cols-2 gap-10 px-8 pt-36 pb-20 max-w-6xl mx-auto items-center min-h-screen z-10">
+    <section class="space-y-4 relative z-10">
+      <h1 class="text-5xl md:text-6xl font-heading font-semibold leading-tight">
+        Hey, I’m <span>Timothy</span>.
+      </h1>
+      <p class="text-md italic opacity-80 max-w-md tracking-wide">
+        “I don’t design trends. I design experiences.”
+      </p>
+      <p id="dynamicLine" class="max-w-md uppercase tracking-wider"></p>
+      <div class="w-12 h-[2px] bg-white my-4"></div>
+      <p class="text-lg max-w-md leading-relaxed">
+        I build digital experiences that blend sharp UI design with powerful code.
+      </p>
+
+      <div class="flex flex-wrap gap-4 pt-4 relative z-20">
+        <a href="pages/portfolio.html" class="group px-6 py-2 border rounded-full transition flex items-center gap-2 select-none">
+          Get My Resume <span class="transition-transform duration-300 inline-block">→</span>
+        </a>
+        <a href="pages/collab.html" class="group px-6 py-2 border rounded-full transition flex items-center gap-2 select-none">
+          Request a Project <span class="transition-transform duration-300 inline-block">→</span>
+        </a>
+      </div>
+    </section>
+
+    <section class="flex flex-col items-center justify-center px-4 relative z-10">
+      <a href="pages/portfolio.html" class="portfolio-box" title="Click to view portfolio">
+        View My Portfolio
+        <div class="portfolio-line"></div>
+        <div class="portfolio-line"></div>
+        <div class="portfolio-line"></div>
+        <div class="portfolio-line"></div>
+        <div class="portfolio-line"></div>
+      </a>
+    </section>
   </main>
 
-  <noscript>
-    <p class="countdown">Launches 29 June 2025</p>
-  </noscript>
+  <!-- FOOTER -->
+  <footer class="w-full text-white px-6 py-10 border-t border-white/20 z-10 relative">
+    <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6 text-sm opacity-70">
+      <p>© 2025 Blvck Aesthetix. All rights reserved.</p>
+      <div class="flex gap-6">
+        <a href="https://facebook.com/blvckaesthetix" target="_blank" class="hover:opacity-100 opacity-70">Facebook</a>
+        <a href="https://instagram.com/blvckaesthetix" target="_blank" class="hover:opacity-100 opacity-70">Instagram</a>
+        <a href="https://x.com/blvckaesthetix" target="_blank" class="hover:opacity-100 opacity-70">X</a>
+      </div>
+    </div>
+  </footer>
 
-  <!-- THREE.JS CDN -->
-  <script src="https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.min.js"></script>
+  <!-- CUSTOM CURSOR -->
+  <div id="customCursor" aria-hidden="true"></div>
+
+  <!-- SCRIPTS -->
   <script>
-    // Setup basic scene, camera, renderer
-    const canvas = document.getElementById('bgCanvas');
-    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setClearColor(0x000000, 0); // transparent background for blending
+    // Intro animation logic
+    window.addEventListener('load', () => {
+      const introOverlay = document.getElementById('introOverlay');
+      const introText = document.getElementById('introText');
+      const header = document.querySelector('header');
+      const main = document.querySelector('main');
+      const footer = document.querySelector('footer');
 
-    const scene = new THREE.Scene();
+      // Show intro text: fade in + scale up
+      requestAnimationFrame(() => {
+        introText.style.opacity = '1';
+        introText.style.transform = 'scale(1)';
+      });
 
-    const camera = new THREE.PerspectiveCamera(
-      75, window.innerWidth / window.innerHeight, 0.1, 1000
-    );
-    camera.position.z = 50;
+      // After 2 seconds, fade out overlay and fade in main content
+      setTimeout(() => {
+        introOverlay.style.transition = 'opacity 0.8s ease';
+        introOverlay.style.opacity = '0';
 
-    // Create particles geometry
-    const particleCount = 120;
-    const positions = new Float32Array(particleCount * 3);
+        header.style.opacity = '1';
+        header.style.pointerEvents = 'auto';
 
-    for(let i = 0; i < particleCount; i++) {
-      positions[i * 3] = (Math.random() - 0.5) * 120;      // x
-      positions[i * 3 + 1] = (Math.random() - 0.5) * 80;  // y
-      positions[i * 3 + 2] = (Math.random() - 0.5) * 40;  // z
-    }
+        main.style.opacity = '1';
+        main.style.pointerEvents = 'auto';
 
-    const geometry = new THREE.BufferGeometry();
-    geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        footer.style.opacity = '1';
+        footer.style.pointerEvents = 'auto';
+      }, 2000);
 
-    // Particle material: small white glowing points
-    const material = new THREE.PointsMaterial({
-      color: 0xffffff,
-      size: 1.8,
-      transparent: true,
-      opacity: 0.15,
-      blending: THREE.AdditiveBlending,
-      depthWrite: false,
+      // Remove introOverlay from DOM after fadeout finishes
+      setTimeout(() => {
+        introOverlay.remove();
+      }, 2800);
     });
 
-    const points = new THREE.Points(geometry, material);
-    scene.add(points);
-
-    // Animate particles slowly drifting upward
-    function animate() {
-      requestAnimationFrame(animate);
-
-      const positions = geometry.attributes.position.array;
-      for(let i = 0; i < particleCount; i++) {
-        // particles move up slowly
-        positions[i * 3 + 1] += 0.02;
-        // reset particle to bottom if too high
-        if(positions[i * 3 + 1] > 40) {
-          positions[i * 3 + 1] = -40;
-          positions[i * 3] = (Math.random() - 0.5) * 120; // random x
-          positions[i * 3 + 2] = (Math.random() - 0.5) * 40; // random z
-        }
-      }
-      geometry.attributes.position.needsUpdate = true;
-
-      renderer.render(scene, camera);
-    }
-    animate();
-
-    // Handle resize
-    window.addEventListener('resize', () => {
-      const width = window.innerWidth;
-      const height = window.innerHeight;
-      renderer.setSize(width, height);
-      camera.aspect = width / height;
-      camera.updateProjectionMatrix();
+    // Animate elements in (after intro)
+    gsap.from("h1", { duration: 1, y: 40, opacity: 0, ease: "power3.out", delay: 2.9 });
+    gsap.from("p.italic", { duration: 1.2, delay: 3.2, y: 30, opacity: 0, ease: "power2.out" });
+    gsap.fromTo("a.group", { opacity: 0, y: 20 }, {
+      duration: 1, delay: 3.6, stagger: 0.2,
+      opacity: 1, y: 0, ease: "power2.out", clearProps: 'all'
     });
 
-    // Countdown logic (unchanged)
-    (() => {
-      const countdownEl = document.querySelector('.countdown');
-      const launchUTC = Date.UTC(2025, 5, 28, 22, 0, 0);
-      function updateCountdown() {
-        const nowUTC = new Date().getTime();
-        const diff = launchUTC - nowUTC;
-        if (diff <= 0) {
-          countdownEl.textContent = "We’ve launched! 🚀";
-          clearInterval(interval);
-          return;
+    // Dynamic typewriter effect
+    const lines = [
+      "Polokwane, South Africa · 20 Y/O",
+      "Designer • Coder • Visual Strategist",
+      "Passionate about clean, bold UI.",
+      "Focused on seamless UX flows.",
+      "Crafting immersive brand stories.",
+    ];
+    const dynamicLine = document.getElementById('dynamicLine');
+    let lineIndex = 0, charIndex = 0, typing = true;
+    const typingSpeed = 100, erasingSpeed = 50, delayBetweenLines = 1800;
+
+    function type() {
+      if (typing) {
+        if (charIndex < lines[lineIndex].length) {
+          dynamicLine.textContent += lines[lineIndex].charAt(charIndex++);
+          setTimeout(type, typingSpeed);
+        } else {
+          typing = false;
+          setTimeout(type, delayBetweenLines);
         }
-        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-        countdownEl.textContent = `${days} day${days !== 1 ? 's' : ''} ` +
-          `${hours} hour${hours !== 1 ? 's' : ''} ` +
-          `${minutes} minute${minutes !== 1 ? 's' : ''} left to drop`;
+      } else {
+        if (charIndex > 0) {
+          dynamicLine.textContent = lines[lineIndex].substring(0, --charIndex);
+          setTimeout(type, erasingSpeed);
+        } else {
+          typing = true;
+          lineIndex = (lineIndex + 1) % lines.length;
+          setTimeout(type, typingSpeed);
+        }
       }
-      updateCountdown();
-      const interval = setInterval(updateCountdown, 60000);
-    })();
+    }
+    type();
+
+    // Mobile Menu Toggle
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const closeMenu = document.getElementById('closeMenu');
+    menuBtn.addEventListener('click', () => mobileMenu.classList.remove('translate-x-full'));
+    closeMenu.addEventListener('click', () => mobileMenu.classList.add('translate-x-full'));
+
+    // Custom Cursor: Trailing Beam
+    const cursor = document.getElementById('customCursor');
+    let mouseX = 0, mouseY = 0;
+    let cursorX = 0, cursorY = 0;
+
+    window.addEventListener('mousemove', e => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    });
+
+    function animateCursor() {
+      cursorX += (mouseX - cursorX) * 0.45;
+      cursorY += (mouseY - cursorY) * 0.5;
+      cursor.style.left = cursorX + 'px';
+      cursor.style.top = cursorY + 'px';
+      requestAnimationFrame(animateCursor);
+    }
+    animateCursor();
+
+    // Hover effects
+    const hoverTargets = document.querySelectorAll('a, button');
+    hoverTargets.forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        cursor.style.width = '28px';
+        cursor.style.height = '28px';
+        cursor.style.boxShadow = '0 0 24px #FF6E40, 0 0 48px #B71C1C';
+      });
+      el.addEventListener('mouseleave', () => {
+        cursor.style.width = '16px';
+        cursor.style.height = '16px';
+        cursor.style.boxShadow = '0 0 16px #FF6E40, 0 0 40px #B71C1C';
+      });
+    });
+
+    // Click pulse effect
+    window.addEventListener('mousedown', () => {
+      cursor.style.transform += ' scale(0.8)';
+    });
+    window.addEventListener('mouseup', () => {
+      cursor.style.transform = 'translate(-50%, -50%)';
+    });
   </script>
 </body>
 </html>
