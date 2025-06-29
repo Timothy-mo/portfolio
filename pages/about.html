@@ -23,9 +23,7 @@
             whiteText: '#FFFFFF',
             subtleWhite: '#FFFFFFB3',
             transparentWhite: '#FFFFFF33',
-          },
-          animation: {
-            pulseSlow: 'pulse 6s ease-in-out infinite',
+            accentRed: '#FF6E40',
           }
         }
       }
@@ -34,13 +32,23 @@
 
   <style>
     body {
-      background-color: #000000;
-      color: #FFFFFF;
+      background-color: #000;
+      color: #fff;
       font-family: 'Inter', sans-serif;
       overflow-x: hidden;
     }
 
-    /* Initially hide main content */
+    #introOverlay {
+      position: fixed;
+      inset: 0;
+      background: #000;
+      z-index: 100000;
+      user-select: none;
+      pointer-events: none;
+      opacity: 1;
+      transition: opacity 0.3s ease;
+    }
+
     header, main, footer {
       opacity: 0;
       pointer-events: none;
@@ -50,8 +58,8 @@
     a.group {
       position: relative;
       overflow: hidden;
-      border-color: #FFFFFF;
-      color: #FFFFFF;
+      border-color: #fff;
+      color: #fff;
       transition: color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
     }
 
@@ -62,13 +70,12 @@
       left: -150%;
       width: 120%;
       height: 100%;
-      background: linear-gradient(90deg, 
-        rgba(255, 110, 64, 0) 0%, 
-        rgba(255, 110, 64, 0.3) 50%, 
+      background: linear-gradient(90deg,
+        rgba(255, 110, 64, 0) 0%,
+        rgba(255, 110, 64, 0.3) 50%,
         rgba(183, 28, 28, 0) 100%);
       transform: translateY(-50%) skewX(-20deg);
       pointer-events: none;
-      transition: none;
     }
 
     a.group:hover {
@@ -82,30 +89,18 @@
 
     a.group:hover::before {
       animation: lightBeam 2.5s linear infinite;
-      left: 150%;
     }
 
     @keyframes lightBeam {
-      0% {
-        left: -150%;
-      }
-      100% {
-        left: 150%;
-      }
+      0% { left: -150%; }
+      100% { left: 150%; }
     }
   </style>
 </head>
 <body class="relative">
 
-  <!-- Intro Overlay: just a black fade that disappears fast -->
-  <div id="introOverlay" aria-hidden="true" style="
-    position: fixed;
-    inset: 0;
-    background: #000;
-    z-index: 100000;
-    user-select: none;
-  ">
-  </div>
+  <!-- INTRO OVERLAY -->
+  <div id="introOverlay" aria-hidden="true"></div>
 
   <!-- HEADER -->
   <header class="w-full px-6 py-6 flex justify-between items-center text-white font-heading fixed top-0 left-0 backdrop-blur-md bg-transparent border-b border-white/10 z-50">
@@ -115,7 +110,7 @@
       <a href="../index.html" class="hover:opacity-100 opacity-70">Home</a>
       <a href="portfolio.html" class="hover:opacity-100 opacity-70">Portfolio</a>
       <a href="web.html" class="hover:opacity-100 opacity-70">Web</a>
-      <a href="/about.html" class="hover:opacity-100 opacity-70">About</a>
+      <a href="about.html" class="hover:opacity-100 opacity-70">About</a>
       <a href="collab.html" class="hover:opacity-100 opacity-70">Collab</a>
     </nav>
   </header>
@@ -135,22 +130,19 @@
 
   <!-- MAIN CONTENT -->
   <main class="relative px-8 pt-36 pb-20 max-w-4xl mx-auto min-h-screen z-10 text-white font-body">
-  <section class="space-y-6">
-    <h1 class="text-4xl font-heading font-semibold leading-tight">
-      About Me
-    </h1>
-    <p class="text-lg opacity-80 max-w-prose tracking-wide leading-relaxed">
-      Hello, I’m Timothy. I’m a designer and developer passionate about crafting clean, bold digital experiences. I focus on creating seamless user interfaces and smooth functionality that make every interaction feel intentional and effortless.
-    </p>
-    <p class="text-lg opacity-80 max-w-prose tracking-wide leading-relaxed">
-      My work centers on blending sharp UI design with powerful, efficient code to build websites and applications that not only look great but also perform flawlessly.
-    </p>
-    <p class="text-lg opacity-80 max-w-prose tracking-wide leading-relaxed">
-      I believe that thoughtful design paired with robust development is key to delivering memorable digital products that truly engage users.
-    </p>
-  </section>
-</main>
-
+    <section class="space-y-6">
+      <h1 class="text-4xl font-heading font-semibold leading-tight">About Me</h1>
+      <p class="text-lg opacity-80 max-w-prose tracking-wide leading-relaxed">
+        Yo, I’m Timothy, the mind and hands behind Blvck Aesthetix. I’m a designer and technician blending raw energy with minimal execution. I build websites, design identities, and bring aesthetic pressure to screens, prints, and real-life builds.
+      </p>
+      <p class="text-lg opacity-80 max-w-prose tracking-wide leading-relaxed">
+        I didn’t start with much. Just curiosity and the hunger to express what I couldn't afford. Everything I know, from design to code, came from late nights, failed attempts, and figuring things out on my phone and PC. No courses. No excuses. Just vibes, vision, and application.
+      </p>
+      <p class="text-lg opacity-80 max-w-prose tracking-wide leading-relaxed">
+        Blvck Aesthetix isn’t a brand, it’s my lab. A personal movement to disrupt the ordinary. If it doesn’t hit different, it’s wasted space.
+      </p>
+    </section>
+  </main>
 
   <!-- FOOTER -->
   <footer class="w-full text-white px-6 py-10 border-t border-white/20 z-10 relative">
@@ -164,38 +156,24 @@
     </div>
   </footer>
 
+  <!-- SCRIPTS -->
   <script>
     window.addEventListener('load', () => {
-      const introOverlay = document.getElementById('introOverlay');
-      const header = document.querySelector('header');
-      const main = document.querySelector('main');
-      const footer = document.querySelector('footer');
+      const overlay = document.getElementById('introOverlay');
+      setTimeout(() => overlay.style.opacity = '0', 300);
+      setTimeout(() => overlay.remove(), 700);
 
-      // Quickly fade out black overlay
-      setTimeout(() => {
-        introOverlay.style.transition = 'opacity 0.3s ease';
-        introOverlay.style.opacity = '0';
-
-        header.style.opacity = '1';
-        header.style.pointerEvents = 'auto';
-
-        main.style.opacity = '1';
-        main.style.pointerEvents = 'auto';
-
-        footer.style.opacity = '1';
-        footer.style.pointerEvents = 'auto';
-      }, 100);
-
-      setTimeout(() => {
-        introOverlay.remove();
-      }, 500);
+      document.querySelector('header').style.opacity = '1';
+      document.querySelector('header').style.pointerEvents = 'auto';
+      document.querySelector('main').style.opacity = '1';
+      document.querySelector('main').style.pointerEvents = 'auto';
+      document.querySelector('footer').style.opacity = '1';
+      document.querySelector('footer').style.pointerEvents = 'auto';
     });
 
-    // Animate main header and paragraphs softly after fade in
     gsap.from("h1", { duration: 1, y: 20, opacity: 0, ease: "power3.out", delay: 0.6 });
-    gsap.from("p", { duration: 1.2, delay: 0.8, y: 15, opacity: 0, ease: "power2.out" });
+    gsap.from("p", { duration: 1.2, delay: 0.8, y: 15, opacity: 0, ease: "power2.out", stagger: 0.2 });
 
-    // Mobile Menu Toggle
     const menuBtn = document.getElementById('menuBtn');
     const mobileMenu = document.getElementById('mobileMenu');
     const closeMenu = document.getElementById('closeMenu');
@@ -205,4 +183,3 @@
 
 </body>
 </html>
-
