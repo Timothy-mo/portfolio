@@ -1,12 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>CXXL Shop | Blvck Aesthetix</title>
+  <title>CXXL Shop Coming Soon | Timothy | Blvck Aesthetix</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
+  <!-- Fonts & Tailwind -->
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;900&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/gsap@3.12.2/dist/gsap.min.js"></script>
 
   <script>
     tailwind.config = {
@@ -14,17 +16,16 @@
         extend: {
           fontFamily: {
             heading: ['Space Grotesk', 'sans-serif'],
+            body: ['Inter', 'sans-serif'],
           },
           colors: {
-            black: '#000',
-            white: '#fff',
+            charcoal: '#000000',
+            whiteText: '#FFFFFF',
             subtleWhite: '#FFFFFFB3',
+            accent: '#FF6E40',
           },
-          borderRadius: {
-            pill: '9999px',
-          },
-          backdropBlur: {
-            xs: '2px',
+          animation: {
+            pulseSlow: 'pulse 6s ease-in-out infinite',
           }
         }
       }
@@ -33,143 +34,165 @@
 
   <style>
     body {
-      background-color: #000;
-      color: #fff;
+      background-color: #000000;
+      color: #FFFFFF;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    main {
+      max-width: 700px;
+      padding: 0 2rem;
+      text-align: left;
+      user-select: none;
+      position: relative;
+      z-index: 10;
+    }
+
+    h1 {
       font-family: 'Space Grotesk', sans-serif;
+      font-weight: 900;
+      font-size: clamp(3.5rem, 10vw, 6rem);
+      line-height: 1.1;
+      letter-spacing: 0.25em;
+      margin-bottom: 1rem;
     }
 
-    .btn {
+    p.tagline {
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 1.25rem;
+      opacity: 0.7;
+      margin-bottom: 3rem;
+      max-width: 600px;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    a.button {
       border: 1px solid #fff;
-      padding: 0.5rem 1.5rem;
+      padding: 0.75rem 2.25rem;
       border-radius: 9999px;
-      text-transform: uppercase;
-      font-size: 0.875rem;
-      transition: all 0.3s ease;
-      cursor: pointer;
-      background: transparent;
       color: #fff;
+      font-weight: 600;
+      font-family: 'Inter', sans-serif;
+      text-decoration: none;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      user-select: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
     }
 
-    .btn:hover {
-      background-color: #fff;
-      color: #000;
+    a.button:hover {
+      background-color: #FF6E40;
+      color: #000000;
+      border-color: #FF6E40;
     }
 
-    .lab-card:hover {
-      transform: scale(1.015);
-    }
+    /* Subtle animated background: gently moving circles */
 
-    .glass-header {
-      background-color: rgba(0, 0, 0, 0.3);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    #backgroundCanvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      background: #000;
     }
   </style>
 </head>
+<body>
 
-<body class="min-h-screen w-full overflow-x-hidden">
+  <canvas id="backgroundCanvas" aria-hidden="true"></canvas>
 
-  <!-- Glassmorphic Header -->
-  <header class="glass-header w-full px-6 py-6 flex justify-between items-center text-white font-heading z-50 fixed top-0 left-0 right-0">
-    <h1 class="text-xl font-bold tracking-widest uppercase">Blvck Aesthetix</h1>
-    <!-- Hamburger (Mobile) -->
-    <button id="menuBtn" class="text-white text-2xl md:hidden focus:outline-none">☰</button>
-    <!-- Desktop Nav -->
-    <nav class="hidden md:flex gap-6 text-sm text-white font-medium">
-      <a href="../index.html" class="hover:opacity-100 opacity-70">Home</a>
-      <a href="portfolio.html" class="hover:opacity-100 opacity-70">Portfolio</a>
-      <a href="shop.html" class="hover:opacity-100 opacity-70">Shop</a>
-      <a href="web.html" class="hover:opacity-100 opacity-70">Web</a>
-      <a href="about.html" class="hover:opacity-100 opacity-70">About</a>
-      <a href="collab.html" class="hover:opacity-100 opacity-70">Collab</a>
-    </nav>
-  </header>
-
-  <!-- Mobile Menu -->
-  <div id="mobileMenu" class="fixed top-0 right-0 h-full w-64 bg-black text-white transform translate-x-full transition-transform duration-300 z-50 p-6 space-y-6 md:hidden">
-    <button id="closeMenu" class="text-right w-full text-xl">×</button>
-    <nav class="flex flex-col gap-4 text-sm font-medium">
-      <a href="../index.html">Home</a>
-      <a href="portfolio.html">Portfolio</a>
-      <a href="shop.html">Shop</a>
-      <a href="web.html">Web</a>
-      <a href="about.html">About</a>
-      <a href="collab.html">Collab</a>
-    </nav>
-  </div>
-
-  <!-- Spacer for fixed header -->
-  <div class="h-[88px]"></div>
-
-  <!-- CXXL Shop Intro -->
-  <section class="text-center py-10 px-4">
-    <h2 class="text-4xl font-bold uppercase tracking-widest">CXXL Shop</h2>
-    <p class="opacity-70 mt-2 text-sm max-w-xl mx-auto">
-      Exclusive CXXL merch series — bold designs with premium quality and limited availability.
-    </p>
-  </section>
-
-  <!-- Product Grid -->
-  <section class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 max-w-6xl mx-auto px-6 pb-20">
-
-    <div class="lab-card border border-white rounded-2xl p-6 transition transform duration-300">
-      <h3 class="text-lg font-semibold uppercase tracking-wide">The Watcher Hoodie</h3>
-      <p class="text-sm opacity-70 mt-2 leading-relaxed">Oversized premium hoodie with signature Watcher design — comfort meets style.</p>
-      <button class="btn mt-4">Buy R750</button>
+  <main role="main" aria-label="Portfolio Coming Soon">
+    <h1>CXXL Shop<br />COMING SOON</h1>
+    <p class="tagline">I'm building something bold and refined. Check back soon or get in touch to collaborate.</p>
+    <div class="btn-group">
+      <a href="../index.html" class="button" aria-label="Go to Home page">Home</a>
+      <a href="collab.html" class="button" aria-label="Request a collaboration">Request a Collab</a>
     </div>
+  </main>
 
-    <div class="lab-card border border-white rounded-2xl p-6 transition transform duration-300">
-      <h3 class="text-lg font-semibold uppercase tracking-wide">The Igniter Tee</h3>
-      <p class="text-sm opacity-70 mt-2 leading-relaxed">Soft cotton tee with the iconic Igniter graphic — designed for everyday wear.</p>
-      <button class="btn mt-4">Buy R450</button>
-    </div>
-
-    <div class="lab-card border border-white rounded-2xl p-6 transition transform duration-300">
-      <h3 class="text-lg font-semibold uppercase tracking-wide">CXXL Logo Cap</h3>
-      <p class="text-sm opacity-70 mt-2 leading-relaxed">Adjustable black cap with embroidered CXXL logo — subtle flex for any look.</p>
-      <button class="btn mt-4">Buy R320</button>
-    </div>
-
-    <div class="lab-card border border-white rounded-2xl p-6 transition transform duration-300">
-      <h3 class="text-lg font-semibold uppercase tracking-wide">Sticker Pack</h3>
-      <p class="text-sm opacity-70 mt-2 leading-relaxed">Set of 10 matte vinyl stickers with exclusive CXXL artwork — perfect for laptops and gear.</p>
-      <button class="btn mt-4">Buy R180</button>
-    </div>
-
-    <div class="lab-card border border-white rounded-2xl p-6 transition transform duration-300">
-      <h3 class="text-lg font-semibold uppercase tracking-wide">Limited Edition Poster</h3>
-      <p class="text-sm opacity-70 mt-2 leading-relaxed">High-quality print of CXXL artwork, signed and numbered — collectors only.</p>
-      <button class="btn mt-4">Buy R600</button>
-    </div>
-
-  </section>
-
-  <!-- Footer -->
-  <footer class="w-full text-white px-6 py-10 border-t border-white/20">
-    <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6 text-sm opacity-70">
-      <p>© 2025 Blvck Aesthetix. All rights reserved.</p>
-      <div class="flex gap-6">
-        <a href="https://facebook.com/blvckaesthetix" target="_blank" class="hover:opacity-100 opacity-70">Facebook</a>
-        <a href="https://www.instagram.com/blvck_aesthetix?igsh=Zm1ndnppeWpieDM5" target="_blank" class="hover:opacity-100 opacity-70">Instagram</a>
-        <a href="https://x.com/blvckaesthetix" target="_blank" class="hover:opacity-100 opacity-70">X</a>
-      </div>
-    </div>
-  </footer>
-
-  <!-- JS for mobile menu -->
   <script>
-    const menuBtn = document.getElementById('menuBtn');
-    const mobileMenu = document.getElementById('mobileMenu');
-    const closeMenu = document.getElementById('closeMenu');
+    // Canvas background: subtle slow drifting circles
 
-    menuBtn.addEventListener('click', () => {
-      mobileMenu.classList.remove('translate-x-full');
+    const canvas = document.getElementById('backgroundCanvas');
+    const ctx = canvas.getContext('2d');
+    let width, height;
+    let circles = [];
+
+    function resize() {
+      width = window.innerWidth;
+      height = window.innerHeight;
+      canvas.width = width;
+      canvas.height = height;
+    }
+
+    function initCircles() {
+      circles = [];
+      const count = 40;
+      for(let i=0; i<count; i++) {
+        circles.push({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          radius: Math.random() * 25 + 10,
+          speedX: (Math.random() - 0.5) * 0.1,
+          speedY: (Math.random() - 0.5) * 0.1,
+          alpha: 0.07 + Math.random() * 0.12,
+        });
+      }
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, width, height);
+
+      circles.forEach(c => {
+        c.x += c.speedX;
+        c.y += c.speedY;
+
+        if(c.x < -c.radius) c.x = width + c.radius;
+        else if(c.x > width + c.radius) c.x = -c.radius;
+
+        if(c.y < -c.radius) c.y = height + c.radius;
+        else if(c.y > height + c.radius) c.y = -c.radius;
+
+        const gradient = ctx.createRadialGradient(c.x, c.y, 0, c.x, c.y, c.radius);
+        gradient.addColorStop(0, `rgba(255,110,64,${c.alpha})`);
+        gradient.addColorStop(1, 'rgba(255,110,64,0)');
+        ctx.fillStyle = gradient;
+        ctx.beginPath();
+        ctx.arc(c.x, c.y, c.radius, 0, Math.PI * 2);
+        ctx.fill();
+      });
+
+      requestAnimationFrame(draw);
+    }
+
+    window.addEventListener('resize', () => {
+      resize();
+      initCircles();
     });
 
-    closeMenu.addEventListener('click', () => {
-      mobileMenu.classList.add('translate-x-full');
-    });
+    resize();
+    initCircles();
+    draw();
+
+    // Fade in main content with GSAP
+
+    gsap.from("h1", { duration: 1.2, y: 30, opacity: 0, ease: "power3.out", delay: 0.5 });
+    gsap.from("p.tagline", { duration: 1.2, y: 20, opacity: 0, ease: "power2.out", delay: 0.8 });
+    gsap.from(".btn-group a", { duration: 1, y: 20, opacity: 0, ease: "power2.out", delay: 1.1, stagger: 0.15 });
   </script>
 
 </body>
