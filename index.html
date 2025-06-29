@@ -33,32 +33,12 @@
   </script>
 
   <style>
-    /* Hide system cursor */
-    body, a, button {
-      cursor: none;
-    }
-
-    /* Glowing custom cursor */
-    #customCursor {
-      position: fixed;
-      top: 0; left: 0;
-      width: 16px;
-      height: 16px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #FF6E40, #B71C1C);
-      box-shadow: 0 0 16px #FF6E40, 0 0 40px #B71C1C;
-      pointer-events: none;
-      transform: translate(-50%, -50%);
-      transition: width 0.25s ease, height 0.25s ease, box-shadow 0.25s ease, transform 0.2s ease;
-      z-index: 9999;
-      mix-blend-mode: screen;
-    }
-
     body {
       background-color: #000000;
       color: #FFFFFF;
       font-family: 'Inter', sans-serif;
       overflow-x: hidden;
+      cursor: default;
     }
 
     /* Initially hide main content */
@@ -88,7 +68,7 @@
       font-size: 1.25rem;
       user-select: none;
       transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-      cursor: none;
+      cursor: pointer;
       text-align: center;
     }
 
@@ -132,52 +112,52 @@
     }
 
     a.group {
-  position: relative;
-  overflow: hidden;
-  border-color: #FFFFFF;
-  color: #FFFFFF;
-  transition: color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-}
+      position: relative;
+      overflow: hidden;
+      border-color: #FFFFFF;
+      color: #FFFFFF;
+      transition: color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
 
-a.group::before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: -150%;
-  width: 120%;
-  height: 100%;
-  background: linear-gradient(90deg, 
-    rgba(255, 110, 64, 0) 0%, 
-    rgba(255, 110, 64, 0.3) 50%, 
-    rgba(183, 28, 28, 0) 100%);
-  transform: translateY(-50%) skewX(-20deg);
-  pointer-events: none;
-  transition: none;
-}
+    a.group::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: -150%;
+      width: 120%;
+      height: 100%;
+      background: linear-gradient(90deg, 
+        rgba(255, 110, 64, 0) 0%, 
+        rgba(255, 110, 64, 0.3) 50%, 
+        rgba(183, 28, 28, 0) 100%);
+      transform: translateY(-50%) skewX(-20deg);
+      pointer-events: none;
+      transition: none;
+    }
 
-a.group:hover {
-  color: #FF6E40;
-  border-color: #FF6E40;
-  box-shadow:
-    0 0 12px #FF6E40,
-    0 0 24px #B71C1C,
-    0 0 48px #FF6E40;
-}
+    a.group:hover {
+      color: #FF6E40;
+      border-color: #FF6E40;
+      box-shadow:
+        0 0 12px #FF6E40,
+        0 0 24px #B71C1C,
+        0 0 48px #FF6E40;
+    }
 
-a.group:hover::before {
-  animation: lightBeam 2.5s linear infinite;
-  left: 150%;
-}
+    a.group:hover::before {
+      animation: lightBeam 2.5s linear infinite;
+      left: 150%;
+    }
 
-@keyframes lightBeam {
-  0% {
-    left: -150%;
-  }
-  100% {
-    left: 150%;
-  }
-}
-
+    @keyframes lightBeam {
+      0% {
+        left: -150%;
+      }
+      100% {
+        left: 150%;
+      }
+    }
   </style>
 </head>
 <body class="relative">
@@ -206,26 +186,26 @@ a.group:hover::before {
       white-space: nowrap;
     ">
       <span class="line1">BLVCK</span><br class="mobile-break" /><span class="line2"> AESTHETIX</span>
-  </h1>
-</div>
+    </h1>
+  </div>
 
-<style>
-  /* Hide the <br> on desktop, show on mobile */
-  .mobile-break {
-    display: none;
-  }
-
-  @media (max-width: 768px) {
-    #introText {
-      font-size: clamp(3rem, 14vw, 6rem);
-      white-space: normal;
-      letter-spacing: 0.2em;
-    }
+  <style>
+    /* Hide the <br> on desktop, show on mobile */
     .mobile-break {
-      display: block;
+      display: none;
     }
-  }
-</style>
+
+    @media (max-width: 768px) {
+      #introText {
+        font-size: clamp(3rem, 14vw, 6rem);
+        white-space: normal;
+        letter-spacing: 0.2em;
+      }
+      .mobile-break {
+        display: block;
+      }
+    }
+  </style>
 
   <!-- HEADER -->
   <header class="w-full px-6 py-6 flex justify-between items-center text-white font-heading fixed top-0 left-0 backdrop-blur-md bg-transparent border-b border-white/10 z-50">
@@ -301,12 +281,6 @@ a.group:hover::before {
       </div>
     </div>
   </footer>
-
-  <!-- CUSTOM CURSOR -->
-  <div id="customCursor" aria-hidden="true">
-  <div class="cursor-core"></div>
-</div>
-
 
   <!-- SCRIPTS -->
   <script>
@@ -393,58 +367,6 @@ a.group:hover::before {
     const closeMenu = document.getElementById('closeMenu');
     menuBtn.addEventListener('click', () => mobileMenu.classList.remove('translate-x-full'));
     closeMenu.addEventListener('click', () => mobileMenu.classList.add('translate-x-full'));
-
-    // CUSTOM CURSOR - Disable on mobile (width < 768px)
-    const cursor = document.getElementById('customCursor');
-    if (window.innerWidth >= 768) {
-      let mouseX = 0, mouseY = 0;
-      let cursorX = 0, cursorY = 0;
-
-      window.addEventListener('mousemove', e => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-      });
-
-      function animateCursor() {
-        cursorX += (mouseX - cursorX) * 0.7;
-        cursorY += (mouseY - cursorY) * 0.7;
-        cursor.style.left = cursorX + 'px';
-        cursor.style.top = cursorY + 'px';
-        requestAnimationFrame(animateCursor);
-      }
-      animateCursor();
-
-      // Hover effects
-      const hoverTargets = document.querySelectorAll('a, button');
-      hoverTargets.forEach(el => {
-        el.addEventListener('mouseenter', () => {
-          cursor.style.width = '28px';
-          cursor.style.height = '28px';
-          cursor.style.boxShadow = '0 0 24px #FF6E40, 0 0 48px #B71C1C';
-        });
-        el.addEventListener('mouseleave', () => {
-          cursor.style.width = '16px';
-          cursor.style.height = '16px';
-          cursor.style.boxShadow = '0 0 16px #FF6E40, 0 0 40px #B71C1C';
-        });
-      });
-
-      // Click pulse effect
-      window.addEventListener('mousedown', () => {
-        cursor.style.transform += ' scale(0.8)';
-      });
-      window.addEventListener('mouseup', () => {
-        cursor.style.transform = 'translate(-50%, -50%)';
-      });
-    } else {
-      // On mobile, hide cursor and restore default pointer
-      cursor.style.display = 'none';
-      document.body.style.cursor = 'auto';
-      // Also remove cursor:none from links/buttons on mobile by overriding with inline style
-      document.querySelectorAll('a, button').forEach(el => {
-        el.style.cursor = 'auto';
-      });
-    }
   </script>
 </body>
 </html>
