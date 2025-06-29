@@ -3,181 +3,145 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Book Web Design | Blvck Aesthetix</title>
-
-  <!-- Fonts & Tailwind -->
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+  <title>Request a Website | Blvck Aesthetix</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;900&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://unpkg.com/gsap@3.12.2/dist/gsap.min.js"></script>
-
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            heading: ['Space Grotesk', 'sans-serif'],
-            body: ['Inter', 'sans-serif'],
-          },
-          colors: {
-            charcoal: '#000000',
-            whiteText: '#FFFFFF',
-            subtleWhite: '#FFFFFFB3',
-            transparentWhite: '#FFFFFF33',
-          },
-          animation: {
-            pulseSlow: 'pulse 6s ease-in-out infinite',
-          }
-        }
-      }
-    }
-  </script>
-
   <style>
-    body, a, button {
-      cursor: none;
-    }
-
-    #customCursor {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 16px;
-      height: 16px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #FF6E40, #B71C1C);
-      box-shadow: 0 0 8px #FF6E40, 0 0 20px #B71C1C;
-      pointer-events: none;
-      transform: translate(-50%, -50%);
-      z-index: 9999;
-      mix-blend-mode: screen;
-    }
-
-    a:hover ~ #customCursor,
-    button:hover ~ #customCursor {
-      width: 28px;
-      height: 28px;
-      box-shadow: 0 0 16px #FF6E40, 0 0 36px #B71C1C;
-    }
-
     body {
-      background-color: #000000;
-      color: #FFFFFF;
-      font-family: 'Inter', sans-serif;
-      overflow-x: hidden;
-    }
-
-    a.group:hover span {
-      transform: translateX(5px);
-    }
-
-    #dynamicLine {
-      color: #FFFFFF;
-      font-variant: small-caps;
-      font-weight: 500;
-      letter-spacing: 0.1em;
-      border-right: 2px solid #FFFFFFB3;
-      animation: blinkCursor 0.75s step-end infinite;
-      white-space: normal;
-      word-break: break-word;
-    }
-
-    @keyframes blinkCursor {
-      50% { border-color: transparent; }
-    }
-
-    a.group {
-      border-color: #FFFFFF;
-      color: #FFFFFF;
-    }
-
-    a.group:hover {
-      background-color: #FFFFFF;
-      color: #000000;
-    }
-
-    form {
-      max-width: 480px;
-      width: 100%;
-      margin-top: 2rem;
-    }
-
-    label {
-      display: block;
-      margin-top: 1.5rem;
-      font-weight: 600;
+      background-color: #000;
       color: #fff;
+      font-family: 'Inter', sans-serif;
     }
-
-    input, select, textarea {
-      background-color: #000000;
-      border: 1px solid #FFFFFF;
-      color: #FFFFFF;
+    input, textarea, select {
+      background-color: transparent;
+      border: 1px solid #fff;
+      color: #fff;
       padding: 0.75rem;
       width: 100%;
-      font-size: 1rem;
-      font-family: 'Inter', sans-serif;
-      margin-top: 0.25rem;
-      border-radius: 9999px;
-      transition: border-color 0.3s ease;
-    }
-
-    textarea {
-      border-radius: 0.375rem;
-    }
-
-    input::placeholder,
-    textarea::placeholder {
-      color: #FFFFFF99;
-    }
-
-    select option {
-      background-color: #000000;
-      color: #FFFFFF;
-    }
-
-    input:focus, textarea:focus, select:focus {
+      border-radius: 0.375rem; /* Rounded corners */
       outline: none;
-      border-color: #FFFFFF;
-      background-color: #000000;
-    }
-
-    button {
-      border: 1px solid #FFFFFF;
-      background: transparent;
-      color: #FFFFFF;
-      padding: 0.75rem 2rem;
-      border-radius: 9999px;
-      font-weight: 500;
-      cursor: pointer;
-      transition: background-color 0.3s ease, color 0.3s ease;
-      margin-top: 2rem;
-      width: 100%;
-      font-family: 'Space Grotesk', sans-serif;
+      transition: border 0.3s ease;
       font-size: 1rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
+    }
+    input:focus, textarea:focus, select:focus {
+      border-color: #FF6E40;
+      outline-offset: 2px;
+    }
+    ::placeholder {
+      color: rgba(255, 255, 255, 0.5);
+    }
+    .form-wrapper {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    button {
+      background: transparent;
+      border: 1px solid #fff;
+      color: #fff;
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.375rem; /* Rounded corners */
+      transition: all 0.3s ease;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #FF6E40;
+      border-color: #FF6E40;
+      color: #000;
+    }
+    /* Custom select styles */
+    .custom-select-wrapper {
+      position: relative;
       user-select: none;
     }
-
-    button:hover, button:focus {
-      background-color: #FFFFFF;
-      color: #000000;
+    .custom-select {
+      border: 1px solid #fff;
+      border-radius: 0.375rem;
+      padding: 0.75rem 1rem;
+      color: #fff;
+      cursor: pointer;
+      position: relative;
+      font-size: 1rem;
+      background-color: transparent;
+    }
+    .custom-select:focus {
       outline: none;
+      border-color: #FF6E40;
+      box-shadow: 0 0 6px #FF6E40;
+    }
+    .custom-select .selected {
+      display: inline-block;
+    }
+    .custom-select .arrow {
+      position: absolute;
+      right: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      border: solid #fff;
+      border-width: 0 2px 2px 0;
+      padding: 3px;
+      pointer-events: none;
+      transform-origin: center;
+      transition: transform 0.3s ease;
+      transform: translateY(-50%) rotate(45deg);
+    }
+    .custom-select.open .arrow {
+      transform: translateY(-50%) rotate(-135deg);
+    }
+    .custom-select .options {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      position: absolute;
+      width: 100%;
+      top: calc(100% + 0.25rem);
+      left: 0;
+      background-color: #000;
+      border: 1px solid #fff;
+      border-radius: 0.375rem;
+      max-height: 200px;
+      overflow-y: auto;
+      z-index: 1000;
+      box-shadow: 0 0 12px rgba(255, 110, 64, 0.5);
+      display: none;
+    }
+    .custom-select.open .options {
+      display: block;
+    }
+    .custom-select .options li {
+      padding: 0.75rem 1rem;
+      cursor: pointer;
+      color: #fff;
+      transition: background-color 0.2s ease;
+    }
+    .custom-select .options li:hover,
+    .custom-select .options li[aria-selected="true"] {
+      background-color: #FF6E40;
+      color: #000;
+    }
+    /* Hide native select */
+    select {
+      display: none;
+    }
+    /* Other website details textarea */
+    #otherWebsiteDetailsWrapper {
+      margin-top: 1rem;
+      display: none;
     }
   </style>
 </head>
+<body>
 
-<body class="relative">
-  <!-- HEADER -->
-  <header class="w-full px-6 py-6 flex justify-between items-center text-white font-heading z-50 fixed top-0 left-0 backdrop-blur-md bg-transparent border-b border-white/10">
+  <!-- HEADER (same as index.html) -->
+  <header class="w-full px-6 py-6 flex justify-between items-center text-white font-heading fixed top-0 left-0 backdrop-blur-md bg-transparent border-b border-white/10 z-50">
     <h1 class="text-xl font-bold tracking-widest uppercase">Blvck Aesthetix</h1>
     <button id="menuBtn" class="text-white text-2xl md:hidden focus:outline-none">☰</button>
     <nav class="hidden md:flex gap-6 text-sm text-white font-medium">
       <a href="../index.html" class="hover:opacity-100 opacity-70">Home</a>
-      <a href="../pages/portfolio.html" class="hover:opacity-100 opacity-70">Portfolio</a>
-      <a href="../pages/web.html" class="hover:opacity-100 opacity-70">Web</a>
-      <a href="../pages/about.html" class="hover:opacity-100 opacity-70">About</a>
-      <a href="../pages/collab.html" class="hover:opacity-100 opacity-70">Collab</a>
+      <a href="portfolio.html" class="hover:opacity-100 opacity-70">Portfolio</a>
+      <a href="web.html" class="hover:opacity-100 opacity-70">Web</a>
+      <a href="about.html" class="hover:opacity-100 opacity-70">About</a>
+      <a href="collab.html" class="hover:opacity-100 opacity-70">Collab</a>
     </nav>
   </header>
 
@@ -186,46 +150,80 @@
     <button id="closeMenu" class="text-right w-full text-xl">×</button>
     <nav class="flex flex-col gap-4 text-sm font-medium">
       <a href="../index.html">Home</a>
-      <a href="../pages/portfolio.html">Portfolio</a>
-      <a href="../pages/web.html">Web</a>
-      <a href="../pages/about.html">About</a>
-      <a href="../pages/collab.html">Collab</a>
+      <a href="portfolio.html">Portfolio</a>
+      <a href="shop.html">Shop</a>
+      <a href="web.html">Web</a>
+      <a href="about.html">About</a>
+      <a href="collab.html">Collab</a>
     </nav>
   </div>
 
-  <!-- MAIN -->
-  <main class="relative pt-36 pb-20 px-8 max-w-4xl mx-auto z-10">
-    <h1 class="text-5xl font-heading font-semibold leading-tight text-center">Book Web Design</h1>
-    <p class="italic opacity-80 text-center max-w-xl mx-auto mt-4">
-      Interested in a custom website that fits your brand? Fill out the form below with your details and project needs. I’ll get back to you with a quote and next steps.
-    </p>
+  <!-- FORM SECTION -->
+  <main class="pt-36 px-6 min-h-screen">
+    <div class="form-wrapper text-left">
+      <h2 class="text-4xl font-heading font-bold mb-4 leading-tight">Request a Website</h2>
+      <p class="text-subtleWhite text-sm mb-10">Tell me what you need, and I’ll respond with a tailored quote.</p>
+      <form action="https://formspree.io/f/xeokvyag" method="POST" class="space-y-6" id="requestForm" autocomplete="off">
+        <div>
+          <label class="block mb-2 text-sm uppercase tracking-wider" for="name">Your Name</label>
+          <input type="text" name="name" id="name" required placeholder="Enter your name" />
+        </div>
+        <div>
+          <label class="block mb-2 text-sm uppercase tracking-wider" for="email">Email</label>
+          <input type="email" name="email" id="email" required placeholder="Enter your email" />
+        </div>
+        <div>
+          <label class="block mb-2 text-sm uppercase tracking-wider" for="websiteType">Type of Website</label>
+          <div class="custom-select-wrapper">
+            <div class="custom-select" tabindex="0" aria-haspopup="listbox" aria-expanded="false" role="combobox" aria-labelledby="websiteTypeLabel" id="customSelect">
+              <span class="selected" id="websiteTypeLabel">Select a website type</span>
+              <i class="arrow"></i>
+              <ul class="options" role="listbox" tabindex="-1" id="optionsList">
+                <li role="option" tabindex="-1" data-value="portfolio">Portfolio</li>
+                <li role="option" tabindex="-1" data-value="ecommerce">E-commerce</li>
+                <li role="option" tabindex="-1" data-value="blog">Blog</li>
+                <li role="option" tabindex="-1" data-value="booking">Booking/Service</li>
+                <li role="option" tabindex="-1" data-value="other">Other</li>
+              </ul>
+              <input type="hidden" name="type" id="hiddenType" required>
+            </div>
+          </div>
+        </div>
 
-    <form action="https://formspree.io/f/YOUR_ID_HERE" method="POST" aria-label="Book Web Design Form" class="mt-10">
-      <label for="name">Full Name</label>
-      <input type="text" id="name" name="name" placeholder="Your full name" required />
+        <div id="otherWebsiteDetailsWrapper">
+          <label class="block mb-2 text-sm uppercase tracking-wider" for="otherWebsiteDetails">Please specify the kind of website</label>
+          <textarea id="otherWebsiteDetails" name="otherWebsiteDetails" rows="4" placeholder="Describe the kind of website you want..."></textarea>
+        </div>
 
-      <label for="email">Email Address</label>
-      <input type="email" id="email" name="email" placeholder="you@example.com" required />
+        <div>
+          <label class="block mb-2 text-sm uppercase tracking-wider" for="budget">Budget (ZAR)</label>
+          <input type="text" name="budget" id="budget" placeholder="e.g. R5000 - R15000" />
+        </div>
 
-      <label for="website-type">What kind of website do you need?</label>
-      <select id="website-type" name="website-type" required>
-        <option value="" disabled selected>Select a type</option>
-        <option value="portfolio">Portfolio</option>
-        <option value="ecommerce">Ecommerce</option>
-        <option value="business">Business</option>
-        <option value="blog">Blog</option>
-        <option value="other">Other</option>
-      </select>
+        <div>
+          <label class="block mb-2 text-sm uppercase tracking-wider" for="deadline">Deadline</label>
+          <input type="date" name="deadline" id="deadline" />
+        </div>
 
-      <label for="details">Project Details</label>
-      <textarea id="details" name="details" rows="5" placeholder="Describe what you want designed" required></textarea>
+        <div>
+          <label class="block mb-2 text-sm uppercase tracking-wider" for="details">Project Details</label>
+          <textarea name="details" id="details" rows="6" required placeholder="Describe what you want..."></textarea>
+        </div>
 
-      <button type="submit" aria-label="Submit web design request form">Request Quote</button>
-    </form>
+        <div>
+          <label class="block mb-2 text-sm uppercase tracking-wider" for="additionalComments">Additional Comments</label>
+          <textarea name="additionalComments" id="additionalComments" rows="4" placeholder="Anything else you want to add?"></textarea>
+        </div>
+
+        <div class="text-center pt-4">
+          <button type="submit">Request Quote →</button>
+        </div>
+      </form>
+    </div>
   </main>
 
   <!-- FOOTER -->
-  <footer class="w-full text-white px-6 py-10 border-t border-white/20 z-10 relative">
+  <footer class="w-full text-white px-6 py-10 border-t border-white/20 z-10 relative mt-20">
     <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6 text-sm opacity-70">
       <p>© 2025 Blvck Aesthetix. All rights reserved.</p>
       <div class="flex gap-6">
@@ -236,45 +234,104 @@
     </div>
   </footer>
 
-  <!-- CURSOR -->
-  <div id="customCursor" aria-hidden="true"></div>
-
-  <!-- SCRIPT -->
+  <!-- SCRIPTS -->
   <script>
-    gsap.from("h1", { duration: 1, y: 40, opacity: 0, ease: "power3.out" });
-    gsap.from("p.italic", { duration: 1.2, delay: 0.3, y: 30, opacity: 0, ease: "power2.out" });
-
     const menuBtn = document.getElementById('menuBtn');
     const mobileMenu = document.getElementById('mobileMenu');
     const closeMenu = document.getElementById('closeMenu');
+    menuBtn.addEventListener('click', () => mobileMenu.classList.remove('translate-x-full'));
+    closeMenu.addEventListener('click', () => mobileMenu.classList.add('translate-x-full'));
 
-    menuBtn.addEventListener('click', () => {
-      mobileMenu.classList.remove('translate-x-full');
+    // Custom Select Logic
+    const customSelect = document.getElementById('customSelect');
+    const optionsList = document.getElementById('optionsList');
+    const selected = customSelect.querySelector('.selected');
+    const hiddenInput = document.getElementById('hiddenType');
+    const otherDetailsWrapper = document.getElementById('otherWebsiteDetailsWrapper');
+    const otherDetailsTextarea = document.getElementById('otherWebsiteDetails');
+
+    // Toggle dropdown open/close
+    customSelect.addEventListener('click', () => {
+      const expanded = customSelect.getAttribute('aria-expanded') === 'true';
+      if (expanded) {
+        closeDropdown();
+      } else {
+        openDropdown();
+      }
     });
 
-    closeMenu.addEventListener('click', () => {
-      mobileMenu.classList.add('translate-x-full');
-    });
-
-    // Smooth glowing cursor logic
-    const cursor = document.getElementById('customCursor');
-    let mouseX = 0, mouseY = 0;
-    let cursorX = 0, cursorY = 0;
-
-    window.addEventListener('mousemove', e => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-    });
-
-    function animateCursor() {
-      cursorX += (mouseX - cursorX) * 0.35;
-      cursorY += (mouseY - cursorY) * 0.35;
-      cursor.style.left = cursorX + 'px';
-      cursor.style.top = cursorY + 'px';
-      requestAnimationFrame(animateCursor);
+    // Open dropdown
+    function openDropdown() {
+      customSelect.classList.add('open');
+      customSelect.setAttribute('aria-expanded', 'true');
+      optionsList.focus();
     }
 
-    animateCursor();
+    // Close dropdown
+    function closeDropdown() {
+      customSelect.classList.remove('open');
+      customSelect.setAttribute('aria-expanded', 'false');
+    }
+
+    // Option selection
+    optionsList.querySelectorAll('li').forEach(option => {
+      option.addEventListener('click', () => {
+        selected.textContent = option.textContent;
+        hiddenInput.value = option.dataset.value;
+        optionsList.querySelectorAll('li').forEach(li => li.removeAttribute('aria-selected'));
+        option.setAttribute('aria-selected', 'true');
+        closeDropdown();
+
+        // Show/hide textarea for "Other"
+        if (option.dataset.value === 'other') {
+          otherDetailsWrapper.style.display = 'block';
+          otherDetailsTextarea.setAttribute('required', 'required');
+        } else {
+          otherDetailsWrapper.style.display = 'none';
+          otherDetailsTextarea.removeAttribute('required');
+          otherDetailsTextarea.value = '';
+        }
+      });
+    });
+
+    // Close dropdown if clicking outside
+    document.addEventListener('click', (e) => {
+      if (!customSelect.contains(e.target)) {
+        closeDropdown();
+      }
+    });
+
+    // Keyboard accessibility
+    customSelect.addEventListener('keydown', (e) => {
+      const items = Array.from(optionsList.querySelectorAll('li'));
+      let index = items.findIndex(item => item.getAttribute('aria-selected') === 'true');
+      if (index === -1) index = 0;
+
+      switch (e.key) {
+        case 'ArrowDown':
+          e.preventDefault();
+          index = (index + 1) % items.length;
+          items[index].focus();
+          break;
+        case 'ArrowUp':
+          e.preventDefault();
+          index = (index - 1 + items.length) % items.length;
+          items[index].focus();
+          break;
+        case 'Enter':
+          e.preventDefault();
+          if (document.activeElement.tagName === 'LI') {
+            document.activeElement.click();
+            customSelect.focus();
+          }
+          break;
+        case 'Escape':
+          closeDropdown();
+          customSelect.focus();
+          break;
+      }
+    });
   </script>
+
 </body>
 </html>
