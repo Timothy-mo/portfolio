@@ -123,6 +123,8 @@
       animation: blinkCursor 0.75s step-end infinite;
       white-space: normal;
       word-break: break-word;
+      max-width: 320px;
+      user-select: none;
     }
 
     @keyframes blinkCursor {
@@ -130,14 +132,52 @@
     }
 
     a.group {
-      border-color: #FFFFFF;
-      color: #FFFFFF;
-    }
+  position: relative;
+  overflow: hidden;
+  border-color: #FFFFFF;
+  color: #FFFFFF;
+  transition: color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
 
-    a.group:hover {
-      background-color: #FFFFFF;
-      color: #000000;
-    }
+a.group::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: -150%;
+  width: 120%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    rgba(255, 110, 64, 0) 0%, 
+    rgba(255, 110, 64, 0.3) 50%, 
+    rgba(183, 28, 28, 0) 100%);
+  transform: translateY(-50%) skewX(-20deg);
+  pointer-events: none;
+  transition: none;
+}
+
+a.group:hover {
+  color: #FF6E40;
+  border-color: #FF6E40;
+  box-shadow:
+    0 0 12px #FF6E40,
+    0 0 24px #B71C1C,
+    0 0 48px #FF6E40;
+}
+
+a.group:hover::before {
+  animation: lightBeam 2.5s linear infinite;
+  left: 150%;
+}
+
+@keyframes lightBeam {
+  0% {
+    left: -150%;
+  }
+  100% {
+    left: 150%;
+  }
+}
+
   </style>
 </head>
 <body class="relative">
@@ -157,17 +197,35 @@
     <h1 id="introText" style="
       font-family: 'Space Grotesk', sans-serif;
       font-weight: 900;
-      font-size: clamp(4rem, 10vw, 8rem);
+      font-size: clamp(2rem, 7vw, 8rem);
       color: white;
       letter-spacing: 0.25em;
       opacity: 0;
-      transform: scale(0.95);
+      transform: scale(0.35);
       transition: opacity 1.2s ease, transform 1.2s ease;
       white-space: nowrap;
     ">
-      BLVCK AESTHETIX
-    </h1>
-  </div>
+      <span class="line1">BLVCK</span><br class="mobile-break" /><span class="line2"> AESTHETIX</span>
+  </h1>
+</div>
+
+<style>
+  /* Hide the <br> on desktop, show on mobile */
+  .mobile-break {
+    display: none;
+  }
+
+  @media (max-width: 768px) {
+    #introText {
+      font-size: clamp(3rem, 14vw, 6rem);
+      white-space: normal;
+      letter-spacing: 0.2em;
+    }
+    .mobile-break {
+      display: block;
+    }
+  }
+</style>
 
   <!-- HEADER -->
   <header class="w-full px-6 py-6 flex justify-between items-center text-white font-heading fixed top-0 left-0 backdrop-blur-md bg-transparent border-b border-white/10 z-50">
@@ -188,6 +246,7 @@
     <nav class="flex flex-col gap-4 text-sm font-medium">
       <a href="index.html">Home</a>
       <a href="pages/portfolio.html">Portfolio</a>
+      <a href="pages/shop.html">Shop</a>
       <a href="pages/web.html">Web</a>
       <a href="pages/about.html">About</a>
       <a href="pages/collab.html">Collab</a>
@@ -237,14 +296,17 @@
       <p>© 2025 Blvck Aesthetix. All rights reserved.</p>
       <div class="flex gap-6">
         <a href="https://facebook.com/blvckaesthetix" target="_blank" class="hover:opacity-100 opacity-70">Facebook</a>
-        <a href="https://instagram.com/blvck_aesthetix?igsh=Zm1ndnppeWpiewDM5" target="_blank" class="hover:opacity-100 opacity-70">Instagram</a>
+        <a href="https://instagram.com/blvckaesthetix" target="_blank" class="hover:opacity-100 opacity-70">Instagram</a>
         <a href="https://x.com/blvckaesthetix" target="_blank" class="hover:opacity-100 opacity-70">X</a>
       </div>
     </div>
   </footer>
 
   <!-- CUSTOM CURSOR -->
-  <div id="customCursor" aria-hidden="true"></div>
+  <div id="customCursor" aria-hidden="true">
+  <div class="cursor-core"></div>
+</div>
+
 
   <!-- SCRIPTS -->
   <script>
@@ -344,8 +406,8 @@
       });
 
       function animateCursor() {
-        cursorX += (mouseX - cursorX) * 0.45;
-        cursorY += (mouseY - cursorY) * 0.5;
+        cursorX += (mouseX - cursorX) * 0.7;
+        cursorY += (mouseY - cursorY) * 0.7;
         cursor.style.left = cursorX + 'px';
         cursor.style.top = cursorY + 'px';
         requestAnimationFrame(animateCursor);
