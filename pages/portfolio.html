@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="en" >
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Portfolio | Blvck Aesthetix</title>
+  <title>Portfolio Coming Soon | Timothy | Blvck Aesthetix</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+  <!-- Fonts & Tailwind -->
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;900&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/gsap@3.12.2/dist/gsap.min.js"></script>
 
@@ -21,21 +21,11 @@
           colors: {
             charcoal: '#000000',
             whiteText: '#FFFFFF',
-            gold: '#D6A75C',
             subtleWhite: '#FFFFFFB3',
-          },
-          borderRadius: {
-            pill: '9999px',
-            card: '1rem',
-          },
-          keyframes: {
-            fadeInUp: {
-              '0%': { opacity: '0', transform: 'translateY(20px)' },
-              '100%': { opacity: '1', transform: 'translateY(0)' },
-            }
+            accent: '#FF6E40',
           },
           animation: {
-            fadeInUp: 'fadeInUp 0.6s ease forwards',
+            pulseSlow: 'pulse 6s ease-in-out infinite',
           }
         }
       }
@@ -43,332 +33,167 @@
   </script>
 
   <style>
-    /* Cursor and basic styling */
-    body,
-    a,
-    button {
-      cursor: none;
-    }
-
-    #customCursor {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 16px;
-      height: 16px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #FF6E40, #B71C1C);
-      box-shadow: 0 0 8px #FF6E40, 0 0 20px #B71C1C;
-      pointer-events: none;
-      transform: translate(-50%, -50%);
-      z-index: 9999;
-      mix-blend-mode: screen;
-    }
-
-    a:hover~#customCursor,
-    button:hover~#customCursor {
-      width: 28px;
-      height: 28px;
-      box-shadow: 0 0 16px #FF6E40, 0 0 36px #B71C1C;
-    }
-
     body {
-      background-color: #000;
+      background-color: #000000;
+      color: #FFFFFF;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    main {
+      max-width: 700px;
+      padding: 0 2rem;
+      text-align: left;
+      user-select: none;
+      position: relative;
+      z-index: 10;
+    }
+
+    h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 900;
+      font-size: clamp(3.5rem, 10vw, 6rem);
+      line-height: 1.1;
+      letter-spacing: 0.25em;
+      margin-bottom: 1rem;
+    }
+
+    p.tagline {
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 1.25rem;
+      opacity: 0.7;
+      margin-bottom: 3rem;
+      max-width: 600px;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    a.button {
+      border: 1px solid #fff;
+      padding: 0.75rem 2.25rem;
+      border-radius: 9999px;
       color: #fff;
-      font-family: 'Space Grotesk', system-ui, sans-serif;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
+      font-weight: 600;
+      font-family: 'Inter', sans-serif;
+      text-decoration: none;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      user-select: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
     }
 
-    a:focus-visible,
-    button:focus-visible {
-      outline: 2px solid #D6A75C;
-      outline-offset: 3px;
+    a.button:hover {
+      background-color: #FF6E40;
+      color: #000000;
+      border-color: #FF6E40;
     }
 
-    a.project-card {
-      transition: border-color 0.3s ease, box-shadow 0.3s ease;
-    }
+    /* Subtle animated background: gently moving circles */
 
-    a.project-card:hover,
-    a.project-card:focus-visible {
-      border-color: #D6A75C;
-      box-shadow: 0 8px 24px rgb(214 167 92 / 0.4);
-      outline: none;
-    }
-
-    .delay-100 {
-      animation-delay: 0.1s;
-    }
-
-    .delay-200 {
-      animation-delay: 0.2s;
-    }
-
-    .delay-300 {
-      animation-delay: 0.3s;
-    }
-
-    .delay-400 {
-      animation-delay: 0.4s;
-    }
-
-    .delay-500 {
-      animation-delay: 0.5s;
-    }
-
-    .delay-600 {
-      animation-delay: 0.6s;
-    }
-
-    /* Intro Overlay */
-    #introOverlay {
+    #backgroundCanvas {
       position: fixed;
       inset: 0;
-      background-color: #000;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 99999;
-      overflow: hidden;
-    }
-
-    #introOverlay h1 {
-      font-family: 'Space Grotesk', sans-serif;
-      font-weight: 700;
-      font-size: 8vw;
-      letter-spacing: 0.3em;
-      color: transparent;
-      -webkit-text-stroke: 1.5px white;
-      position: relative;
-      user-select: none;
-      white-space: nowrap;
-      filter: drop-shadow(0 0 8px #fff);
-      overflow: visible;
-    }
-
-    /* Gradient beam */
-    #introOverlay h1::before {
-      content: 'PORTFOLIO';
-      position: absolute;
-      left: 0;
-      top: 0;
       width: 100%;
       height: 100%;
-      background: linear-gradient(120deg, transparent 30%, #fff 45%, #fff 55%, transparent 70%);
-      background-size: 200% 100%;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: beamMove 1.4s forwards;
-      mix-blend-mode: screen;
-      filter: drop-shadow(0 0 10px #fff);
-      pointer-events: none;
-    }
-
-    /* Flicker effect by shifting background position quickly */
-    @keyframes beamMove {
-      0% {
-        background-position: 200% 0;
-      }
-
-      40% {
-        background-position: 60% 0;
-      }
-
-      60% {
-        background-position: 40% 0;
-      }
-
-      80% {
-        background-position: 20% 0;
-      }
-
-      100% {
-        background-position: -50% 0;
-      }
-    }
-
-    /* Fade out overlay */
-    #introOverlay.fadeOut {
-      animation: fadeOutOverlay 0.5s forwards;
-      animation-delay: 1.5s;
-    }
-
-    @keyframes fadeOutOverlay {
-      to {
-        opacity: 0;
-        pointer-events: none;
-        visibility: hidden;
-      }
-    }
-
-    /* Hide main content initially */
-    main,
-    footer,
-    header,
-    nav {
-      visibility: hidden;
-      opacity: 0;
-      transition: opacity 0.8s ease;
-    }
-
-    main.visible,
-    footer.visible,
-    header.visible,
-    nav.visible {
-      visibility: visible;
-      opacity: 1;
-    }
-
-    /* Load More Animation Overlay */
-    #loadingOverlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.95);
-      color: #fff;
-      font-family: 'Space Grotesk', sans-serif;
-      font-weight: 700;
-      font-size: 4rem;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 999999;
-      opacity: 0;
-      pointer-events: none;
-      user-select: none;
-      text-transform: uppercase;
-      letter-spacing: 0.2em;
-      transition: opacity 0.6s ease;
-    }
-
-    #loadingOverlay.show {
-      opacity: 1;
-      pointer-events: all;
+      z-index: 0;
+      background: #000;
     }
   </style>
 </head>
+<body>
 
-<body class="relative">
+  <canvas id="backgroundCanvas" aria-hidden="true"></canvas>
 
-  <!-- Intro Overlay -->
-  <div id="introOverlay" aria-hidden="true">
-    <h1>PORTFOLIO</h1>
-  </div>
-
-  <!-- Loading Overlay for "Page Developing" -->
-  <div id="loadingOverlay" aria-hidden="true">PAGE DEVELOPING</div>
-
-  <!-- Cursor -->
-  <div id="customCursor" aria-hidden="true"></div>
-
-  <!-- GLASS HEADER -->
-  <header role="banner" class="w-full px-6 py-6 flex justify-between items-center text-white font-heading z-50 fixed top-0 left-0 backdrop-blur-md bg-transparent border-b border-white/10">
-    <h1 class="text-xl font-bold tracking-widest uppercase">Blvck Aesthetix</h1>
-    <nav role="navigation" class="hidden md:flex gap-6 text-sm text-white font-medium">
-      <a href="../index.html" class="hover:opacity-100 opacity-70">Home</a>
-      <a href="portfolio.html" class="hover:opacity-100 opacity-70">Portfolio</a>
-      <a href="web.html" class="hover:opacity-100 opacity-70">Web</a>
-      <a href="about.html" class="hover:opacity-100 opacity-70">About</a>
-      <a href="collab.html" class="hover:opacity-100 opacity-70">Collab</a>
-    </nav>
-  </header>
-
-  <main role="main" class="relative pt-40 px-6 max-w-4xl mx-auto z-10">
-    <h1 class="text-5xl font-bold uppercase tracking-widest mb-2 animate-fadeInUp">Portfolio</h1>
-    <p class="text-lg opacity-70 mb-8 max-w-xl animate-fadeInUp delay-100">A minimal collection of projects reflecting my design and coding craftsmanship.</p>
-
-    <section aria-label="About this portfolio" class="mb-12 max-w-xl text-white/70 text-base leading-relaxed animate-fadeInUp delay-200">
-      <p>This portfolio showcases my recent projects where design meets code with a focus on clarity, minimalism, and impactful user experiences. Each project reflects my commitment to quality and innovation in UI/UX and frontend development.</p>
-    </section>
-
-    <!-- Projects Grid -->
-    <section aria-label="Projects" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-      <!-- Example project cards -->
-      <a href="#" class="project-card border border-white rounded-card p-4 block hover:border-gold transition" tabindex="0">
-        <h3 class="font-semibold mb-2">Project One</h3>
-        <p class="text-white/70 text-sm">A sleek design system with modular components.</p>
-      </a>
-      <a href="#" class="project-card border border-white rounded-card p-4 block hover:border-gold transition" tabindex="0">
-        <h3 class="font-semibold mb-2">Project Two</h3>
-        <p class="text-white/70 text-sm">A custom portfolio website built with React.</p>
-      </a>
-      <a href="#" class="project-card border border-white rounded-card p-4 block hover:border-gold transition" tabindex="0">
-        <h3 class="font-semibold mb-2">Project Three</h3>
-        <p class="text-white/70 text-sm">An interactive dashboard with real-time data.</p>
-      </a>
-    </section>
-
-    <div class="mt-10 text-center">
-      <button id="loadMore" class="px-6 py-2 border border-white rounded-pill hover:bg-gold hover:text-black transition" aria-label="Load more projects">
-        Load More Projects
-      </button>
+  <main role="main" aria-label="Portfolio Coming Soon">
+    <h1>PORTFOLIO<br />COMING SOON</h1>
+    <p class="tagline">I'm building something bold and refined. Check back soon or get in touch to collaborate.</p>
+    <div class="btn-group">
+      <a href="index.html" class="button" aria-label="Go to Home page">Home</a>
+      <a href="pages/collab.html" class="button" aria-label="Request a collaboration">Request a Collab</a>
     </div>
   </main>
 
-  <footer role="contentinfo" class="w-full text-white px-6 py-10 border-t border-white/20 z-10 relative mt-20 text-sm opacity-70">
-    <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6 text-sm opacity-70">
-      <p>© 2025 Blvck Aesthetix. All rights reserved.</p>
-      <div class="flex gap-6">
-        <a href="https://facebook.com/blvckaesthetix" target="_blank" class="hover:opacity-100 opacity-70">Facebook</a>
-        <a href="https://instagram.com/blvckaesthetix" target="_blank" class="hover:opacity-100 opacity-70">Instagram</a>
-        <a href="https://x.com/blvckaesthetix" target="_blank" class="hover:opacity-100 opacity-70">X</a>
-      </div>
-    </div>
-  </footer>
-
   <script>
-    // Custom cursor
-    const cursor = document.getElementById('customCursor');
-    let mouseX = 0, mouseY = 0;
-    let cursorX = 0, cursorY = 0;
+    // Canvas background: subtle slow drifting circles
 
-    window.addEventListener('mousemove', e => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-    });
+    const canvas = document.getElementById('backgroundCanvas');
+    const ctx = canvas.getContext('2d');
+    let width, height;
+    let circles = [];
 
-    function animateCursor() {
-      cursorX += (mouseX - cursorX) * 0.35;
-      cursorY += (mouseY - cursorY) * 0.35;
-      cursor.style.left = cursorX + 'px';
-      cursor.style.top = cursorY + 'px';
-      requestAnimationFrame(animateCursor);
+    function resize() {
+      width = window.innerWidth;
+      height = window.innerHeight;
+      canvas.width = width;
+      canvas.height = height;
     }
 
-    animateCursor();
+    function initCircles() {
+      circles = [];
+      const count = 40;
+      for(let i=0; i<count; i++) {
+        circles.push({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          radius: Math.random() * 25 + 10,
+          speedX: (Math.random() - 0.5) * 0.1,
+          speedY: (Math.random() - 0.5) * 0.1,
+          alpha: 0.07 + Math.random() * 0.12,
+        });
+      }
+    }
 
-    // Intro overlay logic
-    window.addEventListener('load', () => {
-      const intro = document.getElementById('introOverlay');
-      const main = document.querySelector('main');
-      const footer = document.querySelector('footer');
-      const header = document.querySelector('header');
-      const nav = document.querySelector('nav');
+    function draw() {
+      ctx.clearRect(0, 0, width, height);
 
-      // Show main content after intro animation
-      setTimeout(() => {
-        intro.classList.add('fadeOut');
-        main.classList.add('visible');
-        footer.classList.add('visible');
-        header.classList.add('visible');
-        nav.classList.add('visible');
-      }, 1800);
+      circles.forEach(c => {
+        c.x += c.speedX;
+        c.y += c.speedY;
+
+        if(c.x < -c.radius) c.x = width + c.radius;
+        else if(c.x > width + c.radius) c.x = -c.radius;
+
+        if(c.y < -c.radius) c.y = height + c.radius;
+        else if(c.y > height + c.radius) c.y = -c.radius;
+
+        const gradient = ctx.createRadialGradient(c.x, c.y, 0, c.x, c.y, c.radius);
+        gradient.addColorStop(0, `rgba(255,110,64,${c.alpha})`);
+        gradient.addColorStop(1, 'rgba(255,110,64,0)');
+        ctx.fillStyle = gradient;
+        ctx.beginPath();
+        ctx.arc(c.x, c.y, c.radius, 0, Math.PI * 2);
+        ctx.fill();
+      });
+
+      requestAnimationFrame(draw);
+    }
+
+    window.addEventListener('resize', () => {
+      resize();
+      initCircles();
     });
 
-    // Load More button with "Page Developing" animation
-    document.getElementById('loadMore').addEventListener('click', () => {
-      const loadingOverlay = document.getElementById('loadingOverlay');
-      loadingOverlay.classList.add('show');
+    resize();
+    initCircles();
+    draw();
 
-      // Darken the rest of the page
-      document.body.style.pointerEvents = 'none';
+    // Fade in main content with GSAP
 
-      setTimeout(() => {
-        loadingOverlay.classList.remove('show');
-        document.body.style.pointerEvents = 'auto';
-      }, 2000); // Show "Page Developing" for 2 seconds
-    });
+    gsap.from("h1", { duration: 1.2, y: 30, opacity: 0, ease: "power3.out", delay: 0.5 });
+    gsap.from("p.tagline", { duration: 1.2, y: 20, opacity: 0, ease: "power2.out", delay: 0.8 });
+    gsap.from(".btn-group a", { duration: 1, y: 20, opacity: 0, ease: "power2.out", delay: 1.1, stagger: 0.15 });
   </script>
-</body>
 
+</body>
 </html>
