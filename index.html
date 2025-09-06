@@ -4,11 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Timothy | Blvck Aesthetix</title>
+  <meta name="description" content="Timothy | Blvck Aesthetix – Digital designer & coder creating bold, clean, and immersive digital experiences." />
 
   <!-- Fonts & Tailwind -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;900&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/gsap@3.12.2/dist/gsap.min.js"></script>
+  <script src="https://unpkg.com/gsap@3.12.2/dist/TextPlugin.min.js"></script>
 
   <script>
     tailwind.config = {
@@ -41,7 +44,7 @@
       cursor: default;
     }
 
-    /* Initially hide main content */
+    /* Hide content initially */
     header, main, footer {
       opacity: 0;
       pointer-events: none;
@@ -101,8 +104,6 @@
       letter-spacing: 0.1em;
       border-right: 2px solid #FFFFFFB3;
       animation: blinkCursor 0.75s step-end infinite;
-      white-space: normal;
-      word-break: break-word;
       max-width: 320px;
       user-select: none;
     }
@@ -132,8 +133,6 @@
         rgba(255, 110, 64, 0.3) 50%, 
         rgba(183, 28, 28, 0) 100%);
       transform: translateY(-50%) skewX(-20deg);
-      pointer-events: none;
-      transition: none;
     }
 
     a.group:hover {
@@ -151,67 +150,38 @@
     }
 
     @keyframes lightBeam {
-      0% {
-        left: -150%;
-      }
-      100% {
-        left: 150%;
-      }
+      0% { left: -150%; }
+      100% { left: 150%; }
     }
   </style>
 </head>
 <body class="relative">
 
   <!-- Intro Overlay -->
-  <div id="introOverlay" aria-hidden="true" style="
-    position: fixed;
-    inset: 0;
-    background: #000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 100000;
-    user-select: none;
-    pointer-events: none;
-  ">
-    <h1 id="introText" style="
-      font-family: 'Space Grotesk', sans-serif;
-      font-weight: 900;
-      font-size: clamp(2rem, 7vw, 8rem);
-      color: white;
-      letter-spacing: 0.25em;
-      opacity: 0;
-      transform: scale(0.35);
-      transition: opacity 1.2s ease, transform 1.2s ease;
-      white-space: nowrap;
-    ">
+  <div id="introOverlay" aria-hidden="true" class="fixed inset-0 bg-black flex justify-center items-center z-[100000] select-none pointer-events-none">
+    <h1 id="introText" class="font-heading font-black text-white opacity-0 scale-35 whitespace-nowrap"
+      style="font-size: clamp(2rem, 7vw, 8rem); letter-spacing: 0.25em;">
       <span class="line1">BLVCK</span><br class="mobile-break" /><span class="line2"> AESTHETIX</span>
     </h1>
   </div>
 
   <style>
-    /* Hide the <br> on desktop, show on mobile */
-    .mobile-break {
-      display: none;
-    }
-
+    .mobile-break { display: none; }
     @media (max-width: 768px) {
       #introText {
         font-size: clamp(3rem, 14vw, 6rem);
         white-space: normal;
         letter-spacing: 0.2em;
       }
-      .mobile-break {
-        display: block;
-      }
+      .mobile-break { display: block; }
     }
   </style>
 
   <!-- HEADER -->
   <header class="w-full px-6 py-6 flex justify-between items-center text-white font-heading fixed top-0 left-0 backdrop-blur-md bg-transparent border-b border-white/10 z-50">
     <h1 class="text-xl font-bold tracking-widest uppercase">Blvck Aesthetix</h1>
-    <button id="menuBtn" class="text-white text-2xl md:hidden focus:outline-none">☰</button>
-    <nav class="hidden md:flex gap-6 text-sm text-white font-medium">
+    <button id="menuBtn" aria-label="Open menu" class="text-white text-2xl md:hidden focus:outline-none">☰</button>
+    <nav class="hidden md:flex gap-6 text-sm text-white font-medium" aria-label="Main navigation">
       <a href="index.html" class="hover:opacity-100 opacity-70">Home</a>
       <a href="pages/portfolio.html" class="hover:opacity-100 opacity-70">Portfolio</a>
       <a href="pages/web.html" class="hover:opacity-100 opacity-70">Web</a>
@@ -220,9 +190,10 @@
     </nav>
   </header>
 
-  <!-- MOBILE MENU -->
+  <!-- MOBILE MENU + OVERLAY -->
+  <div id="menuOverlay" class="fixed inset-0 bg-black/50 hidden z-40"></div>
   <div id="mobileMenu" class="fixed top-0 right-0 h-full w-64 bg-black text-white transform translate-x-full transition-transform duration-300 z-50 p-6 space-y-6 md:hidden">
-    <button id="closeMenu" class="text-right w-full text-xl">×</button>
+    <button id="closeMenu" aria-label="Close menu" class="text-right w-full text-xl">×</button>
     <nav class="flex flex-col gap-4 text-sm font-medium">
       <a href="index.html">Home</a>
       <a href="pages/portfolio.html">Portfolio</a>
@@ -236,10 +207,10 @@
   <main class="relative grid grid-cols-1 md:grid-cols-2 gap-10 px-8 pt-36 pb-20 max-w-6xl mx-auto items-center min-h-screen z-10">
     <section class="space-y-4 relative z-10">
       <h1 class="text-5xl md:text-6xl font-heading font-semibold leading-tight">
-        Hey, I’m <span>Timothy</span>.
+        Hey, I’m <span class="bg-gradient-to-r from-white via-gray-300 to-white bg-clip-text text-transparent">Timothy</span>.
       </h1>
       <p class="text-md italic opacity-80 max-w-md tracking-wide">
-        “I don’t follow trends. I create experiences.”
+        Full-Stack Developer & Creative Technologist
       </p>
       <p id="dynamicLine" class="max-w-md uppercase tracking-wider"></p>
       <div class="w-12 h-[2px] bg-white my-4"></div>
@@ -248,11 +219,11 @@
       </p>
 
       <div class="flex flex-wrap gap-4 pt-4 relative z-20">
-        <a href="pages/portfolio.html" class="group px-6 py-2 border rounded-full transition flex items-center gap-2 select-none">
-          View My Work <span class="transition-transform duration-300 inline-block">→</span>
+        <a href="pages/portfolio.html" class="group px-6 py-2 border rounded-full flex items-center gap-2 select-none">
+          View My Work <span>→</span>
         </a>
-        <a href="pages/collab.html" class="group px-6 py-2 border rounded-full transition flex items-center gap-2 select-none">
-          Contact Me <span class="transition-transform duration-300 inline-block">→</span>
+        <a href="pages/collab.html" class="group px-6 py-2 border rounded-full flex items-center gap-2 select-none">
+          Contact Me <span>→</span>
         </a>
       </div>
     </section>
@@ -274,16 +245,17 @@
     <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6 text-sm opacity-70">
       <p>© 2025 Blvck Aesthetix. All rights reserved.</p>
       <div class="flex gap-6">
-        <a href="https://facebook.com/blvckaesthetix" target="_blank" class="hover:opacity-100 opacity-70">Facebook</a>
-        <a href="https://www.instagram.com/blvck_aesthetix?igsh=Zm1ndnppeWpieDM5" target="_blank" class="hover:opacity-100 opacity-70">Instagram</a>
-        <a href="https://x.com/blvckaesthetix" target="_blank" class="hover:opacity-100 opacity-70">X</a>
+        <a href="https://facebook.com/blvckaesthetix" target="_blank" class="hover:opacity-100 opacity-70 hover:scale-110 transition">Facebook</a>
+        <a href="https://www.instagram.com/blvck_aesthetix?igsh=Zm1ndnppeWpieDM5" target="_blank" class="hover:opacity-100 opacity-70 hover:scale-110 transition">Instagram</a>
+        <a href="https://x.com/blvckaesthetix" target="_blank" class="hover:opacity-100 opacity-70 hover:scale-110 transition">X</a>
       </div>
     </div>
   </footer>
 
   <!-- SCRIPTS -->
   <script>
-    // Intro animation logic
+    gsap.registerPlugin(TextPlugin);
+
     window.addEventListener('load', () => {
       const introOverlay = document.getElementById('introOverlay');
       const introText = document.getElementById('introText');
@@ -291,81 +263,78 @@
       const main = document.querySelector('main');
       const footer = document.querySelector('footer');
 
-      // Show intro text: fade in + scale up
+      // Fade in intro text
       requestAnimationFrame(() => {
         introText.style.opacity = '1';
         introText.style.transform = 'scale(1)';
       });
 
-      // After 2 seconds, fade out overlay and fade in main content
+      // Fade out overlay and show content
       setTimeout(() => {
         introOverlay.style.transition = 'opacity 0.8s ease';
         introOverlay.style.opacity = '0';
-
         header.style.opacity = '1';
         header.style.pointerEvents = 'auto';
-
         main.style.opacity = '1';
         main.style.pointerEvents = 'auto';
-
         footer.style.opacity = '1';
         footer.style.pointerEvents = 'auto';
       }, 2000);
 
-      // Remove introOverlay from DOM after fadeout finishes
       setTimeout(() => {
         introOverlay.remove();
       }, 2800);
-    });
 
-    // Animate elements in (after intro)
-    gsap.from("h1", { duration: 1, y: 40, opacity: 0, ease: "power3.out", delay: 2.9 });
-    gsap.from("p.italic", { duration: 1.2, delay: 3.2, y: 30, opacity: 0, ease: "power2.out" });
-    gsap.fromTo("a.group", { opacity: 0, y: 20 }, {
-      duration: 1, delay: 3.6, stagger: 0.2,
-      opacity: 1, y: 0, ease: "power2.out", clearProps: 'all'
-    });
+      // Animation sequence
+      const tl = gsap.timeline({ delay: 2.9 });
+      tl.from("h1", { y: 40, opacity: 0, duration: 1, ease: "power3.out" })
+        .from("p.italic", { y: 30, opacity: 0, duration: 1, ease: "power2.out" }, "-=0.5")
+        .from("a.group", { opacity: 0, y: 20, stagger: 0.2, duration: 1, ease: "power2.out" }, "-=0.3");
 
-    // Dynamic typewriter effect
-    const lines = [
-      "Polokwane, South Africa · 20 Y/O",
-      "Designer • Coder • Visual Strategist",
-      "Passionate about clean, bold UI.",
-      "Focused on seamless UX flows.",
-      "Crafting immersive brand stories.",
-    ];
-    const dynamicLine = document.getElementById('dynamicLine');
-    let lineIndex = 0, charIndex = 0, typing = true;
-    const typingSpeed = 100, erasingSpeed = 50, delayBetweenLines = 1800;
-
-    function type() {
-      if (typing) {
-        if (charIndex < lines[lineIndex].length) {
-          dynamicLine.textContent += lines[lineIndex].charAt(charIndex++);
-          setTimeout(type, typingSpeed);
-        } else {
-          typing = false;
-          setTimeout(type, delayBetweenLines);
-        }
-      } else {
-        if (charIndex > 0) {
-          dynamicLine.textContent = lines[lineIndex].substring(0, --charIndex);
-          setTimeout(type, erasingSpeed);
-        } else {
-          typing = true;
-          lineIndex = (lineIndex + 1) % lines.length;
-          setTimeout(type, typingSpeed);
-        }
+      // Typewriter effect (GSAP TextPlugin)
+      const lines = [
+        "Designer • Developer • Visual Strategist",
+        "Passionate about clean, bold UI.",
+        "Focused on seamless UX flows.",
+        "Crafting immersive brand identities."
+      ];
+      let index = 0;
+      function cycleLines() {
+        gsap.to("#dynamicLine", {
+          duration: 1.5,
+          text: lines[index],
+          ease: "power2.out",
+          onComplete: () => {
+            setTimeout(() => {
+              index = (index + 1) % lines.length;
+              cycleLines();
+            }, 1800);
+          }
+        });
       }
-    }
-    type();
+      cycleLines();
+    });
 
     // Mobile Menu Toggle
     const menuBtn = document.getElementById('menuBtn');
     const mobileMenu = document.getElementById('mobileMenu');
     const closeMenu = document.getElementById('closeMenu');
-    menuBtn.addEventListener('click', () => mobileMenu.classList.remove('translate-x-full'));
-    closeMenu.addEventListener('click', () => mobileMenu.classList.add('translate-x-full'));
+    const menuOverlay = document.getElementById('menuOverlay');
+
+    menuBtn.addEventListener('click', () => {
+      mobileMenu.classList.remove('translate-x-full');
+      menuOverlay.classList.remove('hidden');
+    });
+
+    closeMenu.addEventListener('click', () => {
+      mobileMenu.classList.add('translate-x-full');
+      menuOverlay.classList.add('hidden');
+    });
+
+    menuOverlay.addEventListener('click', () => {
+      mobileMenu.classList.add('translate-x-full');
+      menuOverlay.classList.add('hidden');
+    });
   </script>
 </body>
 </html>
